@@ -54,18 +54,16 @@ public class TweetsController {
 
     //Get user tweets for logged in user as well
     @RequestMapping(value = "/getById/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getTweetsByUserId(@PathVariable String userId) throws JsonProcessingException{
-        if(userId != null){
+    public ResponseEntity<String> getTweetsByUserId(@PathVariable String userId) throws JsonProcessingException {
+        if (userId != null) {
             List<Tweet> tweets = tweetRepository.getTweetsByUserId(userId);
 
-            logger.info("Tweets retrieved successfully for user Id : "+ userId );
+            logger.info("Tweets retrieved successfully for user Id : " + userId);
 
             return new ResponseEntity<>(objectMapper.writeValueAsString(tweets), HttpStatus.OK);
-        }
-        else{
+        } else {
             logger.error("Null userId passed for getting tweets");
-            return new ResponseEntity<>(objectMapper.writeValueAsString("User Id cannot be empty"),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objectMapper.writeValueAsString("User Id cannot be empty"), HttpStatus.BAD_REQUEST);
         }
     }
-    
 }

@@ -4,6 +4,7 @@ import com.abc.feedservice.model.Tweet;
 import com.abc.feedservice.model.TweetLike;
 import com.abc.feedservice.repositories.TweetLikeRepository;
 import com.abc.feedservice.repositories.TweetRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.deploy.net.HttpResponse;
 import org.slf4j.Logger;
@@ -32,14 +33,14 @@ public class TweetLikeController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @Autowired
+    @Autowired(required = true)
     TweetLikeRepository tweetLikeRepository;
 
     @Autowired
     TweetRepository tweetRepository;
 
     @RequestMapping(value = "/tweetLike/{userId}/{tweetId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> likeTweet(@PathVariable String userId, @PathVariable String tweetId){
+    public ResponseEntity<String> likeTweet(@PathVariable String userId, @PathVariable String tweetId) throws JsonProcessingException{
         if(userId != null && tweetId != null){
             //Update like Count
             Tweet tweet = tweetRepository.getTweetById(tweetId);
@@ -56,12 +57,12 @@ public class TweetLikeController {
         }
         else{
             logger.error("Invalid initials passed with userId "+  userId + " and tweetId : " +  tweetId );
-            return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Bad Request"), HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(value = "/tweetUnlike/{userId}/{tweetId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> unlikeTweet(@PathVariable String userId, @PathVariable String tweetId){
+    public ResponseEntity<String> unlikeTweet(@PathVariable String userId, @PathVariable String tweetId) throws JsonProcessingException{
         if(userId != null && tweetId != null){
             //Update like Count
             Tweet tweet = tweetRepository.getTweetById(tweetId);
@@ -78,33 +79,33 @@ public class TweetLikeController {
         }
         else{
             logger.error("Invalid initials passed with userId "+  userId + " and tweetId : " +  tweetId );
-            return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Bad Request"), HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(value = "/getByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TweetLike>> getLikesByUserId(@PathVariable String userId){
+    public ResponseEntity<String> getLikesByUserId(@PathVariable String userId) throws JsonProcessingException {
         if(userId != null){
             List<TweetLike> likes = tweetLikeRepository.getTweetLikesByUserId(userId);
             logger.info("Likes retrieved for user id : "+ userId);
-            return new ResponseEntity<>(likes, HttpStatus.OK);
+            return new ResponseEntity<>(objectMapper.writeValueAsString(likes), HttpStatus.OK);
         }
         else{
-            logger.error("Invalid User Id" + userId);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            logger.error("Invalid User id" + userId);
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Invalid User id"),HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(value = "/getByTweetId/{tweetId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TweetLike>> getLikesByTweetId(@PathVariable String tweetId){
+    public ResponseEntity<String> getLikesByTweetId(@PathVariable String tweetId) throws JsonProcessingException{
         if(tweetId != null){
-            List<TweetLike> likes = tweetLikeRepository.getTweetLikesByUserId(tweetId);
+            List<TweetLike> likes = tweetLikeRepository.getTweetLikesByTweetId(tweetId);
             logger.info("Likes retrieved for tweet id : "+ tweetId);
-            return new ResponseEntity<>(likes, HttpStatus.OK);
+            return new ResponseEntity<>(objectMapper.writeValueAsString(likes), HttpStatus.OK);
         }
         else{
             logger.error("Invalid Tweet Id" + tweetId);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Invalid Tweet id"), HttpStatus.BAD_REQUEST);
         }
     }
 }
