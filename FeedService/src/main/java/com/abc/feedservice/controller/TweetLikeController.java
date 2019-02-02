@@ -6,7 +6,6 @@ import com.abc.feedservice.repositories.TweetLikeRepository;
 import com.abc.feedservice.repositories.TweetRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.deploy.net.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.util.List;
 
 /**
  * @author chetan253 on 1/30/19
- * @apiNote
+ * @apiNote Controller to manage likes of tweets
  */
 
 @RestController
@@ -50,10 +49,12 @@ public class TweetLikeController {
 
             //Add user entry in likes collection
             TweetLike tweetLike = new TweetLike(userId, tweetId, new Date());
-            tweetLikeRepository.save(tweetLike);
-            logger.info("User Tweet like entry saved");
-
-            return new ResponseEntity<>(HttpStatus.OK);
+            TweetLike savedLike = tweetLikeRepository.save(tweetLike);
+            if(savedLike != null) {
+                logger.info("User Tweet like entry saved");
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         else{
             logger.error("Invalid initials passed with userId "+  userId + " and tweetId : " +  tweetId );
