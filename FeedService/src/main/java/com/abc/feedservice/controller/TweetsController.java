@@ -4,7 +4,6 @@ import com.abc.feedservice.model.Tweet;
 import com.abc.feedservice.repositories.TweetRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.regexp.internal.RE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,32 +36,67 @@ public class TweetsController {
         if(tweet != null && tweet.getUserId() != null){
             tweet.setDateCreated(new Date());
             tweet.setLikeCount(0);
+            Tweet savedTweet = tweetRepository.save(tweet);
 
-            tweetRepository.save(tweet);
-
-            logger.info("Tweet Saved : " + objectMapper.writeValueAsString(tweet));
-
-            return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), HttpStatus.OK);
+            if(savedTweet != null) {
+                logger.info("Tweet Saved : " + objectMapper.writeValueAsString(tweet));
+                return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), HttpStatus.OK);
+            }
         }
-        else {
-            logger.error("Null Tweet creation attempted with body "  + objectMapper.writeValueAsString(tweet));
-
-            return new ResponseEntity<>("Tweet cannot be empty", HttpStatus.BAD_REQUEST);
-        }
+        logger.error("Null Tweet creation attempted with body "  + objectMapper.writeValueAsString(tweet));
+        return new ResponseEntity<>("Tweet cannot be empty", HttpStatus.BAD_REQUEST);
     }
 
     //Get user tweets for logged in user as well
     @RequestMapping(value = "/getById/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getTweetsByUserId(@PathVariable String userId) throws JsonProcessingException {
-        if (userId != null) {
+        if (userId != null && userId.length() > 0) {
             List<Tweet> tweets = tweetRepository.getTweetsByUserId(userId);
 
             logger.info("Tweets retrieved successfully for user Id : " + userId);
 
             return new ResponseEntity<>(objectMapper.writeValueAsString(tweets), HttpStatus.OK);
         } else {
-            logger.error("Null userId passed for getting tweets");
-            return new ResponseEntity<>(objectMapper.writeValueAsString("User Id cannot be empty"), HttpStatus.BAD_REQUEST);
+            logger.error("Invalid user id");
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Invalid User id"), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //Update the tweet text
+    @RequestMapping(value = "/updateTweet", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateTweet(@RequestBody Tweet tweet) throws JsonProcessingException {
+        if(tweet != null && tweet.getId() != null){
+            Tweet updatedTweet = tweetRepository.save(tweet);
+
+            if(updatedTweet != null) {
+                logger.info("Tweet updated successfully");
+                return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), HttpStatus.OK);
+            }
+        }
+        logger.error("Tweet modification failed for tweet : "+ objectMapper.writeValueAsString(tweet));
+        return new ResponseEntity<>(objectMapper.writeValueAsString("Tweet modification failed"), HttpStatus.BAD_REQUEST);
+    }
+
+    //Delete tweet
+    @RequestMapping(value = "/deleteByTweetId/{tweetId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> deleteTweet(@PathVariable String tweetId) throws JsonProcessingException{
+        if(tweetId != null && tweetId.length() > 0){
+            Tweet tweet = tweetRepository.findById(tweetId).orElse(null);
+
+            if(tweet == null){
+                logger.error("Tweet not found with tweet id "+ tweetId);
+                return new ResponseEntity<>(objectMapper.writeValueAsString("Tweet not found"), HttpStatus.NOT_FOUND);
+            }
+
+            tweetRepository.delete(tweet);
+
+            logger.info("Tweet deleted successfully");
+
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Tweet deleted successfully"), HttpStatus.OK);
+        }
+        else{
+            logger.error("Tweet deletion unsuccessful");
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Tweet deletion unsuccessful"), HttpStatus.BAD_REQUEST);
         }
     }
 }

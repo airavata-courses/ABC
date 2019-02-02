@@ -4,6 +4,7 @@ import com.abc.feedservice.model.Tweet;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author chetan253 on 1/30/19
@@ -12,6 +13,7 @@ import java.util.List;
 
 
 public interface TweetRepository extends MongoRepository<Tweet, String> {
-    public List<Tweet> getTweetsByUserId(String userId);
-    public Tweet getTweetById(String tweetId);
+    List<Tweet> getTweetsByUserId(String userId);
+    Tweet getTweetById(String tweetId);
+    Optional<Tweet> findById(String tweetId);
 }
