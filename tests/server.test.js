@@ -20,6 +20,7 @@ const sequelize = new Sequelize(
 
 const { app } = require("../server");
 const { UserController } = sequelize.import("../controllers/user");
+const { FollowController } = sequelize.import("../controllers/follow");
 
 var dummyUsers = [
   {
@@ -45,11 +46,24 @@ var dummyUsers = [
   }
 ];
 
+var dummyFollows = [
+  {
+    follower: "jessica",
+    following: "jensen"
+  },
+  {
+    follower: "james",
+    following: "jecob"
+  }
+];
+
 beforeEach(done => {
   sequelize
     .sync()
     .then(() => UserController.truncate())
     .then(() => UserController.create(dummyUsers[1]))
+    .then(() => FollowController.truncate())
+    .then(() => FollowController.create(dummyFollows[1]))
     .then(() => done(), error => done(error));
 });
 
@@ -197,6 +211,65 @@ describe("DELETE /user", () => {
       .end((err, res) => {
         if (err) return done(err);
         done(err);
+      });
+  });
+});
+
+describe("POST /follow", () => {
+  it("should insert a follower-following pair when it is valid", done => {
+    request(app)
+      .post("/follow")
+      .send(dummyFollows[0])
+      .expect(201)
+      .expect(res => {
+        expect(res.body.follow.follower).toBe(dummyFollows[0].follower);
+        expect(res.body.follow.following).toBe(dummyFollows[0].following);
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        done(err);
+      });
+  });
+
+  it("should return error when inserting already present pair", done => {
+    request(app)
+      .post("/follow")
+      .send(dummyFollows[1])
+      .expect(500)
+      .expect(res => {
+        expect(res.body.error.name).toBe("SequelizeUniqueConstraintError");
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        done(err);
+      });
+  });
+
+  it("should return count and list of followers", done => {
+    request(app)
+      .get(`/user/${dummyFollows[1].following}/followers`)
+      .expect(200)
+      .expect(res => {
+        expect(res.body.count).toBe(1);
+        expect(res.body.followers[0].username).toBe(dummyFollows[1].follower);
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  it("should return count and list of following", done => {
+    request(app)
+      .get(`/user/${dummyFollows[1].follower}/following`)
+      .expect(200)
+      .expect(res => {
+        expect(res.body.count).toBe(1);
+        expect(res.body.following[0].username).toBe(dummyFollows[1].following);
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        done();
       });
   });
 });

@@ -20,6 +20,7 @@ const sequelize = new Sequelize(
 );
 
 const { UserController } = sequelize.import("./controllers/user");
+const { FollowController } = sequelize.import("./controllers/follow");
 
 const app = express();
 app.use(bodyParser.json());
@@ -78,6 +79,70 @@ app.delete("/user", (req, res) => {
     });
 });
 // end of user routes
+
+// follow create, delete, get followers, get following routes
+app.post("/follow", (req, res) => {
+  if (!req.body.follower || !req.body.following) return res.status(400).send();
+  FollowController.create(req.body)
+    .then(follow => {
+      res.status(201).send({ follow });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+
+app.delete("/follow", (req, res) => {
+  if (!req.body.follower || !req.body.following) return res.status(400).send();
+  FollowController.delete(req.body)
+    .then(result => {
+      res.status(202).send({ deletedCount: result[1] });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+
+app.get("/user/:username/followers", (req, res) => {
+  var username = req.params.username;
+  if (!username) return res.status(400).send();
+  FollowController.find({ following: username })
+    .then(result => {
+      res.status(200).send({
+        count: result.length,
+        followers: _.map(result, item => {
+          return {
+            username: item.follower,
+            createdAt: item.createdAt
+          };
+        })
+      });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+
+app.get("/user/:username/following", (req, res) => {
+  var username = req.params.username;
+  if (!username) return res.status(400).send();
+  FollowController.find({ follower: username })
+    .then(result => {
+      res.status(200).send({
+        count: result.length,
+        following: _.map(result, item => {
+          return {
+            username: item.following,
+            createdAt: item.createdAt
+          };
+        })
+      });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+// end of follow routes
 
 sequelize.sync().then(
   () => {
