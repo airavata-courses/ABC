@@ -1,0 +1,95 @@
+const express = require("express");
+const Sequelize = require("sequelize");
+const bodyParser = require("body-parser");
+const _ = require("lodash");
+
+// Pick and environment out of "development", "test", "production" and load configuration accordingly
+var env = "development";
+const connConfig = require("./config/connection")[env];
+
+// Setup a database connection using loaded configuration
+const sequelize = new Sequelize(
+  connConfig.database,
+  connConfig.username,
+  connConfig.password,
+  {
+    dialect: connConfig.dialect,
+    host: connConfig.host,
+    operatorsAliases: false
+  }
+);
+
+const { UserController } = sequelize.import("./controllers/user");
+
+const app = express();
+app.use(bodyParser.json());
+
+// user create, get, update, delete routes
+app.post("/user", (req, res) => {
+  UserController.create(req.body)
+    .then(user => {
+      res.status(201).send({ user });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+
+app.get("/user/:username", (req, res) => {
+  var username = req.params.username;
+  if (!username) return res.status(400).send();
+
+  UserController.find({ username })
+    .then(user => {
+      if (user.length == 0) return res.status(404).send();
+      res.status(200).send({ user: user[0] });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+
+app.patch("/user", (req, res) => {
+  params = _.pick(req.body, ["username", "name", "bio", "dob", "location"]);
+  if (!params.username) return res.status(400).send("No username is specified");
+
+  UserController.update(params)
+    .then(result => {
+      console.log("result", result);
+      if (result[1] === 0) return res.status(404).send();
+      res.status(200).send({ user: result[0] });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+
+app.delete("/user", (req, res) => {
+  username = req.body.username;
+  if (!username) return res.status(400).send("No username is specified");
+
+  UserController.delete({ username })
+    .then(result => {
+      if (result === 0) return res.status(404).send();
+      res.status(202).send({ deletedCount: result });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+// end of user routes
+
+sequelize.sync().then(
+  () => {
+    app.listen(3000, () => {
+      console.log("Server started on port 3000..");
+    });
+  },
+  error => {
+    console.log("Error occurred while syncing database");
+  }
+);
+
+module.exports = {
+  app
+};
