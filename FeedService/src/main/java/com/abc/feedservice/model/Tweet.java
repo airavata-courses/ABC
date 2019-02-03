@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author chetan253 on 1/30/19
@@ -22,7 +21,6 @@ public class Tweet {
     private String tweetText;
     private Date dateCreated;
     private long likeCount;
-    private List<String> likedUsers;
 
     public Tweet(){
 
@@ -85,15 +83,6 @@ public class Tweet {
         this.likeCount = likeCount;
     }
 
-    public List<String> getLikedUsers() {
-        return likedUsers;
-    }
-
-    public void setLikedUsers(List<String> likedUsers) {
-        this.likedUsers = likedUsers;
-    }
-
-
     @Override
     public String toString() {
         return "Tweet{" +
@@ -103,7 +92,6 @@ public class Tweet {
                 ", tweetText='" + tweetText + '\'' +
                 ", dateCreated=" + dateCreated +
                 ", likeCount=" + likeCount +
-                ", likedUsers=" + likedUsers +
                 '}';
     }
 }
