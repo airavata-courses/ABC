@@ -56,7 +56,6 @@ app.patch("/user", (req, res) => {
 
   UserController.update(params)
     .then(result => {
-      console.log("result", result);
       if (result[1] === 0) return res.status(404).send();
       res.status(200).send({ user: result[0] });
     })
