@@ -90,14 +90,25 @@ describe("POST /user", () => {
       });
   });
 
-  it("should return 500 if username already exists in database", done => {
+  it("should return 409 if username already exists in database", done => {
     request(app)
       .post("/user")
       .send(dummyUsers[1])
-      .expect(500)
+      .expect(409)
       .expect(res => {
         expect(res.body.error.name).toBe("SequelizeUniqueConstraintError");
       })
+      .end((err, res) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  it("should return 400 if any field is missing", done => {
+    request(app)
+      .post("/user")
+      .send({})
+      .expect(400)
       .end((err, res) => {
         if (err) return done(err);
         done();

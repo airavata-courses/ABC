@@ -27,11 +27,22 @@ app.use(bodyParser.json());
 
 // user create, get, update, delete routes
 app.post("/user", (req, res) => {
+  params = _.pick(req.body, ["username", "name", "bio", "dob", "location"]);
+  if (!params.username)
+    return res.status(400).send("username is not specified");
+  if (!params.name) return res.status(400).send("name is not specified");
+  if (!params.bio) return res.status(400).send("bio is not specified");
+  if (!params.dob) return res.status(400).send("dob is not specified");
+  if (!params.location)
+    return res.status(400).send("location is not specified");
+
   UserController.create(req.body)
     .then(user => {
       res.status(201).send({ user });
     })
     .catch(error => {
+      if (error.name === "SequelizeUniqueConstraintError")
+        return res.status(409).send({ error });
       res.status(500).send({ error });
     });
 });
