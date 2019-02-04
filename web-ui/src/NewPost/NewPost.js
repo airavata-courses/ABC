@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createPost } from '../_actions/postActions';
+import { createPost } from '../_actions/post.actions';
 
 class NewPost extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            body: "" 
+            body: ""
         };
 
         this.onChange = this.onChange.bind(this);
@@ -15,7 +15,7 @@ class NewPost extends Component{
     }
 
     onChange(e) {
-        this.setState({   
+        this.setState({
             [e.target.name]: e.target.value
         });
     }
@@ -27,9 +27,9 @@ class NewPost extends Component{
             title: "Dummy",
             body: this.state.body
         };
-        
+
         this.props.createPost(post);
-         
+
     }
     render() {
         return (
@@ -40,7 +40,7 @@ class NewPost extends Component{
                             Create new post ...
                         </div>
                     </div>
-                    
+
                     { /*onChange="" */}
                     <input  className="form-control"
                         name="body"
@@ -50,7 +50,7 @@ class NewPost extends Component{
                         aria-label="New Post"
                         size="140"
                     />
-                    
+
                     { /*onClick="" */}
                     <button className="btn btn-primary"
                         name="buttontweet"

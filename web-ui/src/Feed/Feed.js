@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import Profile from '../components/profile';
-import NewPost from '../components/newPost';
-import FeedPost from '../components/feedPost';
-import { fetchPosts } from '../_actions/postActions';
+import NewPost from '../NewPost/NewPost';
+import { FeedPost } from './FeedPost';
+import { fetchPosts } from '../_actions/post.actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './styles.css';
 
 class Feed extends Component{
-    
+
     componentWillMount() {
         this.props.fetchPosts()
     }
-    
+
     componentWillReceiveProps(nextProps) {
         if(nextProps.newPost) {
             console.log(nextProps.newPost);
@@ -29,7 +29,7 @@ class Feed extends Component{
             post => (
                 <FeedPost key={post.id}onClickMethod={this.incrementLike} data={post} />
             )
-        ) 
+        )
         return (
             <div className="row FeedPage">
                 <div className="col-2">
@@ -57,4 +57,5 @@ const mapStateToProps = state => ({
     newPost: state.posts.item
 });
 
-export default connect(mapStateToProps, { fetchPosts })(Feed);
+const connectedFeed = connect(mapStateToProps, { fetchPosts })(Feed);
+export { connectedFeed as Feed };
