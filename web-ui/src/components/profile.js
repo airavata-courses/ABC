@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import "./styles.css";
+import React, { Component } from 'react';
+import './styles.css';
 
-class Profile extends Component{
+class Profile extends Component {
     render() {
         return (
             <div className="card UserProfile">

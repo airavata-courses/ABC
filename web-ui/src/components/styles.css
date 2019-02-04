@@ -1,3 +1,10 @@
+.PostUserInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .UserProfile{
     display: flex;
     flex-direction: column;
