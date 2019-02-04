@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-function FeedPost (props) {
+export function FeedPost (props) {
     return(
         <div className="card border-dark mb-3">
             <div className="card-header PostUserInfo">
@@ -21,5 +21,3 @@ function FeedPost (props) {
         </div>
     );
 }
-
-export default FeedPost;

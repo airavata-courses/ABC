@@ -5,7 +5,7 @@ export function fetchPosts() {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(res => res.json())
             .then(posts => dispatch({
-                type: postConstants.FETCH_POSTS, 
+                type: postConstants.FETCH_POSTS,
                 payload: posts
             })
             );
@@ -14,7 +14,6 @@ export function fetchPosts() {
 
 export function createPost(postData) {
     return function (dispatch) {
-
         fetch(  'https://jsonplaceholder.typicode.com/posts', {
             method: 'POST',
             headers: {
@@ -25,7 +24,7 @@ export function createPost(postData) {
         })
             .then(res => res.json())
             .then(post => dispatch({
-                type: postConstants.NEW_POST, 
+                type: postConstants.NEW_POST,
                 payload: post
             }));
     }
