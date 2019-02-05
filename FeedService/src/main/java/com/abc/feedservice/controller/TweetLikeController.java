@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -38,6 +35,7 @@ public class TweetLikeController {
     @Autowired
     TweetRepository tweetRepository;
 
+    @CrossOrigin
     @RequestMapping(value = "/tweetLike/{userId}/{tweetId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> likeTweet(@PathVariable String userId, @PathVariable String tweetId) throws JsonProcessingException{
         if(userId != null && tweetId != null){
@@ -62,6 +60,7 @@ public class TweetLikeController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/tweetUnlike/{userId}/{tweetId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> unlikeTweet(@PathVariable String userId, @PathVariable String tweetId) throws JsonProcessingException{
         if(userId != null && tweetId != null){
@@ -84,6 +83,7 @@ public class TweetLikeController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/getByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getLikesByUserId(@PathVariable String userId) throws JsonProcessingException {
         if(userId != null){
@@ -97,6 +97,7 @@ public class TweetLikeController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/getByTweetId/{tweetId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getLikesByTweetId(@PathVariable String tweetId) throws JsonProcessingException{
         if(tweetId != null){

@@ -31,6 +31,7 @@ public class TweetsController {
     TweetRepository tweetRepository;
 
     //Create new Tweet
+    @CrossOrigin
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createTweet(@RequestBody Tweet tweet) throws JsonProcessingException {
         if(tweet != null && tweet.getUserId() != null){
@@ -48,10 +49,11 @@ public class TweetsController {
     }
 
     //Get user tweets for logged in user as well
-    @RequestMapping(value = "/getById/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    @RequestMapping(value = "/getByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getTweetsByUserId(@PathVariable String userId) throws JsonProcessingException {
         if (userId != null && userId.length() > 0) {
-            List<Tweet> tweets = tweetRepository.getTweetsByUserId(userId);
+            List<Tweet> tweets = tweetRepository.getTweetsByUserIdOrderByDateCreatedDesc(userId);
 
             logger.info("Tweets retrieved successfully for user Id : " + userId);
 
@@ -63,6 +65,7 @@ public class TweetsController {
     }
 
     //Update the tweet text
+    @CrossOrigin
     @RequestMapping(value = "/updateTweet", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateTweet(@RequestBody Tweet tweet) throws JsonProcessingException {
         if(tweet != null && tweet.getId() != null){
@@ -78,6 +81,7 @@ public class TweetsController {
     }
 
     //Delete tweet
+    @CrossOrigin
     @RequestMapping(value = "/deleteByTweetId/{tweetId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> deleteTweet(@PathVariable String tweetId) throws JsonProcessingException{
         if(tweetId != null && tweetId.length() > 0){
