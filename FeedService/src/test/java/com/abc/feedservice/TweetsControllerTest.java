@@ -77,7 +77,7 @@ public class TweetsControllerTest {
     public void getTweetsByUserIdSuccess(){
         RestTemplate restTemplate = new RestTemplate();
         Tweet testTweet = tweetRepository.save(tweet);
-        final String baseUrl = "http://localhost:" + port + "/tweet/getById/"+tweet.getUserId();
+        final String baseUrl = "http://localhost:" + port + "/tweet/getByUserId/"+tweet.getUserId();
 
         ResponseEntity<String> result = restTemplate.getForEntity(baseUrl, String.class);
         Assert.assertEquals(200, result.getStatusCodeValue());
@@ -91,7 +91,7 @@ public class TweetsControllerTest {
     @Test
     public void getTweetsByUserIdFailure(){
         RestTemplate restTemplate = new RestTemplate();
-        final String baseUrl = "http://localhost:" + port + "/tweet/getById/";
+        final String baseUrl = "http://localhost:" + port + "/tweet/getByUserId/";
 
         try{
             restTemplate.getForEntity(baseUrl, String.class);
