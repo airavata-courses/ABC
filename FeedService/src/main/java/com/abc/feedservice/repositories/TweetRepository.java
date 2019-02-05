@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 public interface TweetRepository extends MongoRepository<Tweet, String> {
-    List<Tweet> getTweetsByUserId(String userId);
+    List<Tweet> getTweetsByUserIdOrderByDateCreatedDesc(String userId);
     Tweet getTweetById(String tweetId);
     Optional<Tweet> findById(String tweetId);
 }
