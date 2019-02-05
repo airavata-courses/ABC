@@ -18,6 +18,7 @@ public class Tweet {
 
     private String userId;
     private String userName;
+    private String name;
     private String tweetText;
     private Date dateCreated;
     private long likeCount;
@@ -26,10 +27,11 @@ public class Tweet {
 
     }
 
-    public Tweet(String id, String userId, String userName, String tweetText, Date dateCreated, long likeCount) {
+    public Tweet(String id, String userId, String userName, String name, String tweetText, Date dateCreated, long likeCount) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
+        this.name =  name;
         this.tweetText = tweetText;
         this.dateCreated = dateCreated;
         this.likeCount = likeCount;
@@ -57,6 +59,14 @@ public class Tweet {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTweetText() {
