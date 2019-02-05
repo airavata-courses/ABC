@@ -3,6 +3,8 @@ const Sequelize = require("sequelize");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 
+const queue = require("./messaging");
+
 // Pick and environment out of "development", "test", "production" and load configuration accordingly
 var env = "development";
 const connConfig = require("./config/connection")[env];
@@ -27,9 +29,17 @@ app.use(bodyParser.json());
 
 // user create, get, update, delete routes
 app.post("/user", (req, res) => {
-  params = _.pick(req.body, ["username", "name", "bio", "dob", "location"]);
-  if (!params.username)
-    return res.status(400).send("username is not specified");
+  params = _.pick(req.body, [
+    "userId",
+    "userName",
+    "name",
+    "bio",
+    "dob",
+    "location"
+  ]);
+  if (!params.userId) return res.status(400).send("userId is not specified");
+  if (!params.userName)
+    return res.status(400).send("userName is not specified");
   if (!params.name) return res.status(400).send("name is not specified");
   if (!params.bio) return res.status(400).send("bio is not specified");
   if (!params.dob) return res.status(400).send("dob is not specified");
@@ -47,11 +57,11 @@ app.post("/user", (req, res) => {
     });
 });
 
-app.get("/user/:username", (req, res) => {
-  var username = req.params.username;
-  if (!username) return res.status(400).send();
+app.get("/user/:userId", (req, res) => {
+  var userId = req.params.userId;
+  if (!userId) return res.status(400).send();
 
-  UserController.find({ username })
+  UserController.find({ userId })
     .then(user => {
       if (user.length == 0) return res.status(404).send();
       res.status(200).send({ user: user[0] });
@@ -62,8 +72,15 @@ app.get("/user/:username", (req, res) => {
 });
 
 app.patch("/user", (req, res) => {
-  params = _.pick(req.body, ["username", "name", "bio", "dob", "location"]);
-  if (!params.username) return res.status(400).send("No username is specified");
+  params = _.pick(req.body, [
+    "userId",
+    "userName",
+    "name",
+    "bio",
+    "dob",
+    "location"
+  ]);
+  if (!params.userId) return res.status(400).send("userId is not specified");
 
   UserController.update(params)
     .then(result => {
@@ -76,10 +93,10 @@ app.patch("/user", (req, res) => {
 });
 
 app.delete("/user", (req, res) => {
-  username = req.body.username;
-  if (!username) return res.status(400).send("No username is specified");
+  userId = req.body.userId;
+  if (!userId) return res.status(400).send("userId is not specified");
 
-  UserController.delete({ username })
+  UserController.delete({ userId })
     .then(result => {
       if (result === 0) return res.status(404).send();
       res.status(202).send({ deletedCount: result });
@@ -113,16 +130,16 @@ app.delete("/follow", (req, res) => {
     });
 });
 
-app.get("/user/:username/followers", (req, res) => {
-  var username = req.params.username;
-  if (!username) return res.status(400).send();
-  FollowController.find({ following: username })
+app.get("/user/:userId/followers", (req, res) => {
+  var userId = req.params.userId;
+  if (!userId) return res.status(400).send();
+  FollowController.find({ following: userId })
     .then(result => {
       res.status(200).send({
         count: result.length,
         followers: _.map(result, item => {
           return {
-            username: item.follower,
+            userId: item.follower,
             createdAt: item.createdAt
           };
         })
@@ -133,16 +150,16 @@ app.get("/user/:username/followers", (req, res) => {
     });
 });
 
-app.get("/user/:username/following", (req, res) => {
-  var username = req.params.username;
-  if (!username) return res.status(400).send();
-  FollowController.find({ follower: username })
+app.get("/user/:userId/following", (req, res) => {
+  var userId = req.params.userId;
+  if (!userId) return res.status(400).send();
+  FollowController.find({ follower: userId })
     .then(result => {
       res.status(200).send({
         count: result.length,
         following: _.map(result, item => {
           return {
-            username: item.following,
+            userId: item.following,
             createdAt: item.createdAt
           };
         })

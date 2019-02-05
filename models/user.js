@@ -1,9 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define("user", {
-    username: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true
+    },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
     name: {
       type: DataTypes.STRING,
