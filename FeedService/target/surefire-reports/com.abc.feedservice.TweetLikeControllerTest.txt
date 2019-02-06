@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.abc.feedservice.TweetLikeControllerTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.364 s - in com.abc.feedservice.TweetLikeControllerTest
