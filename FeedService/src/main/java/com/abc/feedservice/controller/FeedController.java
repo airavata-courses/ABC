@@ -42,11 +42,10 @@ public class FeedController {
         headers.add("Authorization","Bearer fake-jwt-token");
         if(userId != null){
             RestTemplate restTemplate = new RestTemplate();
-            String baseURL = "http://192.168.1.128:3000/user/"+ userId +"/following";
+            String baseURL = "http://localhost:3000/user/"+ userId +"/following";
             ResponseEntity<String> result = restTemplate.getForEntity(baseURL, String.class);
 
-            JSONObject obj = new JSONObject(result.getBody());
-            JSONArray arr = obj.getJSONArray("following");
+            JSONArray arr = new JSONArray(result.getBody());
 
             List<String> userFollowingIds = new ArrayList<String>();
             for(int i = 0; i < arr.length(); i++){
