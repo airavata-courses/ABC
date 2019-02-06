@@ -21,19 +21,18 @@ class NewPost extends Component{
     }
 
     onSubmit(e) {
-        e.preventDefault();
-
-        console.log("NewPost: Printing propr");
-        console.log(this.props);
+        console.log("USER")
+        console.log(this.props) 
         const post = {
             userId: this.props.user.id,
-            userName: this.props.user.username,
+            userName: this.props.user.userName,
             tweetText: this.state.tweetText
         };
 
         // setTimeOut( function() {
             this.props.createPost(post);
         // }, 1000);
+        // window.location.reload()
 
     }
     componentDidCatch(error, info) {
@@ -79,5 +78,10 @@ NewPost.propTypes = {
 const mapStateToProps = state => ({
     user: state.authentication.user
 });
+
+//function mapStateToProps(state) {
+//    console.log("----------------------------")
+//    console.log(state)
+//}
 
 export default connect(mapStateToProps, { createPost })(NewPost);

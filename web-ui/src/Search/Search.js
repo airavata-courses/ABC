@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchUsers } from '../_actions/search.actions'
 import { PopulateUser } from './PopulateUser'
-
+import { followUser, unFollowUser } from '../_actions'
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 class Search extends Component {
 
 
@@ -16,6 +17,7 @@ class Search extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.toggleFollow = this.toggleFollow.bind(this); 
     }
 
     onChange(e) {
@@ -34,24 +36,40 @@ class Search extends Component {
 
         // console.log("Search.js: Printin props from onSubmit");
         // console.log(this.props);
-        const post = {
-            userSearch: this.state.userSearch
+        const postData = {
+            userSearch: this.state.userSearch,
+            userId:  this.props.user.id
         };
 
         // setTimeOut( function() {
-        this.props.searchUsers(post);
+        this.props.searchUsers(postData);
         // }, 1000);
 
     }
 
-    toggleFollow () {
-        console.log("in toggle follow");
+    toggleFollow (userId, followUserId, doFollow) {
+        console.log("in toggle follow" + followUserId);
+
+        const params = {
+            follower: userId,
+            following: followUserId
+        }
+        if (doFollow) {
+            this.props.followUser(params);
+        } else {
+            this.props.unFollowUser(params);
+        }
+
     }
     render() {
-
+        // if (this.props.users.length === 0) {
+        //     return (
+        //         <h1> NO USER FOUND</h1>
+        //     );
+        // }
         const populateUsers = this.props.users.map(
             user => (
-                <PopulateUser key={user.id}
+                <PopulateUser key={user.userId}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}
@@ -109,6 +127,12 @@ class Search extends Component {
     }
 }
 
+Search.propTypes = {
+    followUser: PropTypes.func.isRequired,
+    unFollowUser: PropTypes.func.isRequired,
+    searchUsers: PropTypes.func.isRequired,
+};
+
 function mapStateToProps (state) {
     console.log("maptoprops");
     console.log(state);
@@ -119,6 +143,6 @@ function mapStateToProps (state) {
     };
 }
 
-const connectedSearch = connect(mapStateToProps, { searchUsers })(Search);
+const connectedSearch = connect(mapStateToProps, { searchUsers, followUser, unFollowUser })(Search);
 export {connectedSearch as Search}
 

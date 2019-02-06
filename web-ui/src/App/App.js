@@ -9,6 +9,7 @@ import { LoginPage } from '../Login';
 import { HomePage } from '../Home';
 import { Search } from '../Search';
 import { Followers } from '../Search';
+import { Following } from '../Search';
 import { PrivateRoute } from '../components';
 import { history } from '../_helpers'
 import { alertActions } from '../_actions';
@@ -44,6 +45,7 @@ class App extends Component {
                                     <Route path="/register" component={RegisterPage} />
                                     <PrivateRoute exact path="/search" component={Search} />
                                     <PrivateRoute exact path="/followers" component={Followers} />
+                                    <PrivateRoute exact path="/following" component={Following} />
                                     <Route exact component={Error} />
                                 </Switch>
                             </div>
