@@ -1,0 +1,5 @@
+export const searchConstants = {
+    SEARCH_USER: 'SEARCH_USER',
+    SEARCH_FOLLOWERS: 'SEARCH_FOLLOWERS',
+    SEARCH_FOLLOWING: 'SEARCH_FOLLOWING'
+}

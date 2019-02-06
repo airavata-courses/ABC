@@ -14,6 +14,9 @@ class HomePage extends React.Component {
     }
 
     render() {
+
+        console.log("HomePage.js: printing props")
+        console.log(this.props);
         const { user, users } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
@@ -23,18 +26,18 @@ class HomePage extends React.Component {
                 {users.loading && <em>Loading users...</em>}
                 {users.error && <span className="text-danger">ERROR: {users.error}</span>}
                 {users.items &&
-                    <ul>
-                        {users.items.map((user, index) =>
-                            <li key={user.id}>
-                                {user.firstName + ' ' + user.lastName}
-                                {
-                                    user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                        : <span> - <a href="#" onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
-                                }
-                            </li>
-                        )}
-                    </ul>
+                        <ul>
+                            {users.items.map((user, index) =>
+                                <li key={user.id}>
+                                    {user.firstName + ' ' + user.lastName}
+                                    {
+                                        user.deleting ? <em> - Deleting...</em>
+                                            : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
+                                            : <span> - <a href="/" onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
+                                    }
+                                </li>
+                            )}
+                        </ul>
                 }
                 <p>
                     <Link to="/login">Logout</Link>

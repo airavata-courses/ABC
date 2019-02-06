@@ -7,7 +7,7 @@ class NewPost extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            body: ""
+            tweetText: ""
         };
 
         this.onChange = this.onChange.bind(this);
@@ -21,16 +21,24 @@ class NewPost extends Component{
     }
 
     onSubmit(e) {
-        e.preventDefault();
-
+        console.log("USER")
+        console.log(this.props) 
         const post = {
-            title: "Dummy",
-            body: this.state.body
+            userId: this.props.user.id,
+            userName: this.props.user.userName,
+            tweetText: this.state.tweetText
         };
 
-        this.props.createPost(post);
+        // setTimeOut( function() {
+            this.props.createPost(post);
+        // }, 1000);
+        // window.location.reload()
 
     }
+    componentDidCatch(error, info) {
+        console.log(error);
+        console.log(info);
+    } 
     render() {
         return (
             <form onSubmit={this.onSubmit}>
@@ -43,9 +51,9 @@ class NewPost extends Component{
 
                     { /*onChange="" */}
                     <input  className="form-control"
-                        name="body"
+                        name="tweetText"
                         type="text"
-                        value={this.state.body}
+                        value={this.state.tweetText}
                         onChange={this.onChange}
                         aria-label="New Post"
                         size="140"
@@ -67,4 +75,13 @@ NewPost.propTypes = {
     createPost: PropTypes.func.isRequired
 }
 
-export default connect(null, { createPost })(NewPost);
+const mapStateToProps = state => ({
+    user: state.authentication.user
+});
+
+//function mapStateToProps(state) {
+//    console.log("----------------------------")
+//    console.log(state)
+//}
+
+export default connect(mapStateToProps, { createPost })(NewPost);

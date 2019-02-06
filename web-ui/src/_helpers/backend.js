@@ -4,9 +4,6 @@ let users = JSON.parse(localStorage.getItem('users')) || [];
 export function configureFakeBackend() {
     let realFetch = window.fetch;
     window.fetch = function (url, opts) {
-
-
-        console.log("in backend.js");
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
             setTimeout(() => {
@@ -76,7 +73,6 @@ export function configureFakeBackend() {
                 // register user
                 if (url.endsWith('/users/register') && opts.method === 'POST') {
                     // get new user object from post body
-                    console.log("backend: register");
                     let newUser = JSON.parse(opts.body);
 
                     // validation
