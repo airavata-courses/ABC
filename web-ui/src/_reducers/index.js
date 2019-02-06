@@ -6,6 +6,8 @@ import registration from './registration.reducer'
 import users from './user.reducer'
 import searchReducer from './search.reducer'
 import newsReducer from './news.reducer'
+import followReducer from './follow.reducer'
+
 const rootReducer = combineReducers({
     posts: postReducer,
     alert: alertReducer,
@@ -13,7 +15,8 @@ const rootReducer = combineReducers({
     registration: registration,
     users: users,
     search_result: searchReducer,
-    news: newsReducer
+    news: newsReducer,
+    followResult: followReducer
 });
 
 export default rootReducer;

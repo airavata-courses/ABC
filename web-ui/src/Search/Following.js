@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { searchFollowers } from '../_actions/search.actions'
+import { searchFollowing } from '../_actions/search.actions'
 import { PopulateUser } from './PopulateUser'
 
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
-class Followers extends Component {
+class Following extends Component {
 
     componentWillMount() {
-        this.props.searchFollowers(this.props.user.id)
+        this.props.searchFollowing(this.props.user.id)
     }
 
     toggleFollow () {
@@ -61,6 +61,6 @@ function mapStateToProps (state) {
     };
 }
 
-const connectedFollower = connect(mapStateToProps, { searchFollowers })(Followers);
-export {connectedFollower as Followers}
+const connectedFollowing = connect(mapStateToProps, { searchFollowing })(Following);
+export {connectedFollowing as Following}
 

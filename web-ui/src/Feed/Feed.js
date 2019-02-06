@@ -33,8 +33,6 @@ class Feed extends Component{
     }
 
     render() {
-        console.log("FEED Render");
-        console.log(this.props);
         const postItems = this.props.posts.map(
             post => (
                 <FeedPost key={post.id}
