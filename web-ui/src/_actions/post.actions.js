@@ -24,7 +24,7 @@ export function fetchPosts(id) {
 }
 
 export function createPost(postData) {
-    console.log(postData) 
+    console.log(postData)
     return function (dispatch) {
         // fetch(  'https://jsonplaceholder.typicode.com/posts', {
         fetch('http://192.168.1.69:8080/tweet/create/', {

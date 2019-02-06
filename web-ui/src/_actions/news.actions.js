@@ -11,7 +11,6 @@ function timeout(ms, promise) {
 }
 
 export function fetchNews () {
-    console.log("FETCHING NEWS")
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         timeout(5000, fetch(`http://absheth-dev.grnoc.iu.edu:5000/top_headlines`))
