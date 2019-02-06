@@ -156,7 +156,7 @@ Response Body:
 }
 ```
 
-9. Search users by partial userName (method = GET, endpoint = '/user/search/john')
+9. Search users by partial userName (method = GET, endpoint = '/user/search/{partialUserName}')
 ```
 GET http://localhost:3000/user/search/john
 
