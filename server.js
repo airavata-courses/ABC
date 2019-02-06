@@ -29,15 +29,7 @@ app.use(bodyParser.json());
 
 // user create, get, update, delete routes
 app.post("/user", (req, res) => {
-  params = _.pick(req.body, [
-    "userId",
-    "userName",
-    "name",
-    "bio",
-    "dob",
-    "location"
-  ]);
-  if (!params.userId) return res.status(400).send("userId is not specified");
+  params = _.pick(req.body, ["userName", "name", "bio", "dob", "location"]);
   if (!params.userName)
     return res.status(400).send("userName is not specified");
   if (!params.name) return res.status(400).send("name is not specified");
