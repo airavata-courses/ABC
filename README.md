@@ -155,3 +155,34 @@ Response Body:
     ]
 }
 ```
+
+9. Search users by partial userName (method = GET, endpoint = '/user/search/john')
+```
+GET http://localhost:3000/user/search/john
+
+Response Body:
+{
+    "searchResult": [
+        {
+            "userId": "2938ndudhnkwj3nrkjnsdf",
+            "userName": "johndoe",
+            "name": "jogn Doe",
+            "bio": "I'm Doe...Jane Doe",
+            "dob": "2019-02-04T00:00:00.000Z",
+            "location": "California, USA",
+            "createdAt": "2019-02-06T01:54:54.000Z",
+            "updatedAt": "2019-02-06T01:54:54.000Z"
+        },
+        {
+            "userId": "d28ea3de-46f9-44c3-b8cc-28376fe38505",
+            "userName": "johnasadcghdoe",
+            "name": "John Doe",
+            "bio": "I'm Doe...John Doe",
+            "dob": "1990-01-01T05:00:00.000Z",
+            "location": "New York",
+            "createdAt": "2019-02-06T05:51:00.000Z",
+            "updatedAt": "2019-02-06T05:51:00.000Z"
+        }
+    ]
+}
+```
