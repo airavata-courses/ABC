@@ -1,6 +1,8 @@
 const express = require("express");
 const Sequelize = require("sequelize");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt-nodejs");
+var cors = require("cors");
 const _ = require("lodash");
 
 const queue = require("./messaging");
@@ -26,17 +28,27 @@ const { FollowController } = sequelize.import("./controllers/follow");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 // user create, get, update, delete routes
 app.post("/user", (req, res) => {
-  params = _.pick(req.body, ["userName", "name", "bio", "dob", "location"]);
+  params = _.pick(req.body, [
+    "userName",
+    "password",
+    "firstName",
+    "lastName",
+    "bio",
+    "dob",
+    "location"
+  ]);
   if (!params.userName)
-    return res.status(400).send("userName is not specified");
-  if (!params.name) return res.status(400).send("name is not specified");
-  if (!params.bio) return res.status(400).send("bio is not specified");
-  if (!params.dob) return res.status(400).send("dob is not specified");
-  if (!params.location)
-    return res.status(400).send("location is not specified");
+    return res
+      .status(400)
+      .send({ error: { name: "userName is not specified" } });
+  if (!params.password)
+    return res
+      .status(400)
+      .send({ error: { name: "password is not specified" } });
 
   UserController.create(req.body)
     .then(user => {
@@ -67,7 +79,8 @@ app.patch("/user", (req, res) => {
   params = _.pick(req.body, [
     "userId",
     "userName",
-    "name",
+    "firstName",
+    "lastName",
     "bio",
     "dob",
     "location"
@@ -162,6 +175,46 @@ app.get("/user/:userId/following", (req, res) => {
     });
 });
 // end of follow routes
+
+// user search route
+app.get("/user/search/:searchQuery", (req, res) => {
+  var searchQuery = req.params.searchQuery;
+  if (!searchQuery)
+    return res
+      .status(400)
+      .send({ error: { name: "searchQuery is not specified" } });
+  UserController.find({
+    userName: { [Sequelize.Op.like]: "%" + searchQuery + "%" }
+  })
+    .then(searchResult => {
+      res.status(200).send({ searchResult });
+    })
+    .catch(error => {
+      res.status(500).send({ error });
+    });
+});
+// end of user search route
+
+// login
+app.post("/user/login", (req, res) => {
+  var userName = req.body.userName;
+  var password = req.body.password;
+  if (!userName)
+    return res
+      .status(400)
+      .send({ error: { name: "userName is not specified" } });
+  if (!password)
+    return res
+      .status(400)
+      .send({ error: { name: "password is not specified" } });
+  UserController.find({ userName }).then(user => {
+    console.log(user);
+    if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
+      return res.status(400).send({ error: { name: "Invalid credentials" } });
+    res.status(200).send("Success");
+  });
+});
+// end of login
 
 sequelize.sync().then(
   () => {

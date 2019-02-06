@@ -26,7 +26,9 @@ var dummyUsers = [
   {
     userId: "sdlfkj2938rhfsdijfskfj",
     userName: "johndoe",
-    name: "John Doe",
+    password: "bacon",
+    firstName: "John",
+    lastName: "Doe",
     bio: "Doeing John",
     dob: Date.parse("1 Jan 1990"),
     location: "New York, USA"
@@ -34,7 +36,9 @@ var dummyUsers = [
   {
     userId: "2938nduhnkwj3nrkjnsdf",
     userName: "janedoe",
-    name: "Jane Doe",
+    password: "beef",
+    firstName: "Jane",
+    lastName: "Doe",
     bio: "I'm Doe...Jane Doe",
     dob: Date.parse("1 May 1990"),
     location: "California, USA"
@@ -42,7 +46,9 @@ var dummyUsers = [
   {
     userId: "bxcmvnskuerywfnwoiro23",
     userName: "janicedoe",
-    name: "Janice Doe",
+    password: "chandler",
+    firstName: "Janice",
+    lastName: "Doe",
     bio: "Oh....my....god....!",
     dob: Date.parse("1 May 1980"),
     location: "15, Yemen Road, Yemen"
@@ -78,9 +84,10 @@ describe("POST /user", () => {
       .expect(201)
       .expect(res => {
         // Check if correct response is sent
-        expect(res.body.user.userId).toBe(dummyUsers[0].userId);
+        // expect(res.body.user.userId).toExist();
         expect(res.body.user.userName).toBe(dummyUsers[0].userName);
-        expect(res.body.user.name).toBe(dummyUsers[0].name);
+        expect(res.body.user.firstName).toBe(dummyUsers[0].firstName);
+        expect(res.body.user.lastName).toBe(dummyUsers[0].lastName);
         expect(res.body.user.bio).toBe(dummyUsers[0].bio);
         // TODO: having issue here: getting null only in testing framework, works fine in postman
         // expect(res.body.user.dob).toBe(dummyUsers[0].dob);

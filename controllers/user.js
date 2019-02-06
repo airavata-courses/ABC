@@ -1,5 +1,6 @@
 const _ = require("lodash");
 const uuidv4 = require("uuid/v4");
+const bcrypt = require("bcrypt-nodejs");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.import("../models/user");
@@ -10,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     // Returns a promise
     create: params => {
       return User.create({
-        userId: uuidv4(),
+        userId: params.userId || uuidv4(),
         userName: params.userName,
-        name: params.name,
+        password: bcrypt.hashSync(params.password),
+        firstName: params.firstName,
+        lastName: params.lastName,
         bio: params.bio,
         dob: Date.parse(params.dob),
         location: params.location
