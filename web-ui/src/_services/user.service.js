@@ -52,13 +52,14 @@ function getById(id) {
 }
 
 function register(user) {
+    console.log(user)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
 
-    return fetch(`${URL}/users/register`, requestOptions).then(handleResponse);
+    return fetch(`${URL}/user`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
@@ -84,6 +85,7 @@ function _delete(id) {
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
+        console.log(data);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
