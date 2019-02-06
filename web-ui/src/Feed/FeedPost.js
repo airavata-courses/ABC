@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.css";
+import React from 'react';
+import './styles.css';
 
 export function FeedPost (props) {
     return(
@@ -10,13 +10,24 @@ export function FeedPost (props) {
             </div>
 
             <div className="card-body">
-                <p className="card-text text-dark"> {props.data.body}</p>
+                <p className="card-text text-dark"> {props.data.tweetText}</p>
 
-                <button className="btn btn-primary" onClick={props.onClickMethod} disabled={false}>
+                <button className="btn btn-primary"
+                    onClick={props.incrementLike(props.data.id, props.user.username)}
+                    disabled={false}>
                     <span className="badge badge-light">
-                        {props.data.id}
+                        {props.data.id} {props.user.username}
                     </span> Like
+
                 </button>
+                { parseInt(props.data.userId) === props.user.id
+                        && <button className="btn btn-danger"
+                            onClick={() => {props.onClickDelete(props.data.id)}}
+                        >
+                            Delete
+                        </button>
+                }
+
             </div>
         </div>
     );

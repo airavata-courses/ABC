@@ -7,6 +7,8 @@ import Error from '../components/error'
 import { RegisterPage } from '../Register';
 import { LoginPage } from '../Login';
 import { HomePage } from '../Home';
+import { Search } from '../Search';
+import { Followers } from '../Search';
 import { PrivateRoute } from '../components';
 import { history } from '../_helpers'
 import { alertActions } from '../_actions';
@@ -29,7 +31,7 @@ class App extends Component {
 
             <div className="jumbotron">
                 <div className="container">
-                    <div className="col-sm-8 col-sm-offset-2">
+                    <div>
 
                         { alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
@@ -37,9 +39,11 @@ class App extends Component {
                         <Router history={history}>
                             <div>
                                 <Switch>
-                                    <PrivateRoute exact path="/" component={HomePage} />
-                                    <Route exact path="/login" component={LoginPage} />
-                                    <Route exact path="/register" component={RegisterPage} />
+                                    <PrivateRoute exact path="/" component={Feed} />
+                                    <Route path="/login" component={LoginPage} />
+                                    <Route path="/register" component={RegisterPage} />
+                                    <PrivateRoute exact path="/search" component={Search} />
+                                    <PrivateRoute exact path="/followers" component={Followers} />
                                     <Route exact component={Error} />
                                 </Switch>
                             </div>
