@@ -186,3 +186,24 @@ Response Body:
     ]
 }
 ```
+
+10. Login (method = POST, endpoint = '/user/login')
+```
+POST http://localhost:3000/user/login
+{
+    "userName": "abcd",
+    "password": "abcd"
+}
+
+Response Body (success):
+{
+    "message": "Success"
+}
+
+Response Body (failure):
+{
+    "error": {
+        "name": "Invalid credentials"
+    }
+}
+```
