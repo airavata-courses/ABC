@@ -268,13 +268,12 @@ describe("POST /follow", () => {
       });
   });
 
-  it("should return count and list of followers", done => {
+  it("should return list of followers", done => {
     request(app)
       .get(`/user/${dummyFollows[1].following}/followers`)
       .expect(200)
       .expect(res => {
-        expect(res.body.count).toBe(1);
-        expect(res.body.followers[0].userId).toBe(dummyFollows[1].follower);
+        expect(res.body[0].userId).toBe(dummyFollows[1].follower);
       })
       .end((err, res) => {
         if (err) return done(err);
@@ -282,13 +281,12 @@ describe("POST /follow", () => {
       });
   });
 
-  it("should return count and list of following", done => {
+  it("should return list of following", done => {
     request(app)
       .get(`/user/${dummyFollows[1].follower}/following`)
       .expect(200)
       .expect(res => {
-        expect(res.body.count).toBe(1);
-        expect(res.body.following[0].userId).toBe(dummyFollows[1].following);
+        expect(res.body[0].userId).toBe(dummyFollows[1].following);
       })
       .end((err, res) => {
         if (err) return done(err);
