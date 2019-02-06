@@ -24,22 +24,31 @@ const { FollowController } = sequelize.import("../controllers/follow");
 
 var dummyUsers = [
   {
-    username: "johndoe",
-    name: "John Doe",
+    userId: "sdlfkj2938rhfsdijfskfj",
+    userName: "johndoe",
+    password: "bacon",
+    firstName: "John",
+    lastName: "Doe",
     bio: "Doeing John",
     dob: Date.parse("1 Jan 1990"),
     location: "New York, USA"
   },
   {
-    username: "janedoe",
-    name: "Jane Doe",
+    userId: "2938nduhnkwj3nrkjnsdf",
+    userName: "janedoe",
+    password: "beef",
+    firstName: "Jane",
+    lastName: "Doe",
     bio: "I'm Doe...Jane Doe",
     dob: Date.parse("1 May 1990"),
     location: "California, USA"
   },
   {
-    username: "janicedoe",
-    name: "Janice Doe",
+    userId: "bxcmvnskuerywfnwoiro23",
+    userName: "janicedoe",
+    password: "chandler",
+    firstName: "Janice",
+    lastName: "Doe",
     bio: "Oh....my....god....!",
     dob: Date.parse("1 May 1980"),
     location: "15, Yemen Road, Yemen"
@@ -75,8 +84,10 @@ describe("POST /user", () => {
       .expect(201)
       .expect(res => {
         // Check if correct response is sent
-        expect(res.body.user.username).toBe(dummyUsers[0].username);
-        expect(res.body.user.name).toBe(dummyUsers[0].name);
+        // expect(res.body.user.userId).toExist();
+        expect(res.body.user.userName).toBe(dummyUsers[0].userName);
+        expect(res.body.user.firstName).toBe(dummyUsers[0].firstName);
+        expect(res.body.user.lastName).toBe(dummyUsers[0].lastName);
         expect(res.body.user.bio).toBe(dummyUsers[0].bio);
         // TODO: having issue here: getting null only in testing framework, works fine in postman
         // expect(res.body.user.dob).toBe(dummyUsers[0].dob);
@@ -90,11 +101,11 @@ describe("POST /user", () => {
       });
   });
 
-  it("should return 500 if username already exists in database", done => {
+  it("should return 409 if userId already exists in database", done => {
     request(app)
       .post("/user")
       .send(dummyUsers[1])
-      .expect(500)
+      .expect(409)
       .expect(res => {
         expect(res.body.error.name).toBe("SequelizeUniqueConstraintError");
       })
@@ -103,15 +114,27 @@ describe("POST /user", () => {
         done();
       });
   });
+
+  it("should return 400 if any field is missing", done => {
+    request(app)
+      .post("/user")
+      .send({})
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+        done();
+      });
+  });
 });
 
-describe("GET /user/:username", () => {
+describe("GET /user/:userId", () => {
   it("should return a user if it exists in the database", done => {
     request(app)
-      .get(`/user/${dummyUsers[1].username}`)
+      .get(`/user/${dummyUsers[1].userId}`)
       .expect(200)
       .expect(res => {
-        expect(res.body.user.username).toBe(dummyUsers[1].username);
+        expect(res.body.user.userId).toBe(dummyUsers[1].userId);
+        expect(res.body.user.userName).toBe(dummyUsers[1].userName);
         expect(res.body.user.name).toBe(dummyUsers[1].name);
         expect(res.body.user.bio).toBe(dummyUsers[1].bio);
         // expect(res.body.user.dob).toBe(dummyUsers[1].dob);
@@ -123,7 +146,7 @@ describe("GET /user/:username", () => {
       });
   });
 
-  it("should return 404 if username does not exist in the database", done => {
+  it("should return 404 if userId does not exist in the database", done => {
     request(app)
       .get(`/user/dummyUser`)
       .expect(404)
@@ -149,9 +172,9 @@ describe("PATCH /user", () => {
       });
   });
 
-  it("should return 400 if username is not passed", done => {
+  it("should return 400 if userId is not passed", done => {
     var dummyUser = Object.assign({}, dummyUsers[1]);
-    delete dummyUser.username;
+    delete dummyUser.userId;
 
     request(app)
       .patch("/user")
@@ -163,9 +186,9 @@ describe("PATCH /user", () => {
       });
   });
 
-  it("should return 404 is username is not found in database", done => {
+  it("should return 404 is userId is not found in database", done => {
     var dummyUser = Object.assign({}, dummyUsers[1]);
-    dummyUser.username = "abcde";
+    dummyUser.userId = "abcde";
 
     request(app)
       .patch("/user")
@@ -182,7 +205,7 @@ describe("DELETE /user", () => {
   it("should delete user if it is present in the database", done => {
     request(app)
       .delete("/user")
-      .send({ username: dummyUsers[1].username })
+      .send({ userId: dummyUsers[1].userId })
       .expect(202)
       .expect(res => {
         expect(res.body.deletedCount).toBe(1);
@@ -193,7 +216,7 @@ describe("DELETE /user", () => {
       });
   });
 
-  it("should return 400 if no username is specified", done => {
+  it("should return 400 if no userId is specified", done => {
     request(app)
       .delete("/user")
       .expect(400)
@@ -203,10 +226,10 @@ describe("DELETE /user", () => {
       });
   });
 
-  it("should return 404 if username is not present in database", done => {
+  it("should return 404 if userId is not present in database", done => {
     request(app)
       .delete("/user")
-      .send({ username: "abcdxyz" })
+      .send({ userId: "abcdxyz" })
       .expect(404)
       .end((err, res) => {
         if (err) return done(err);
@@ -218,7 +241,7 @@ describe("DELETE /user", () => {
 describe("POST /follow", () => {
   it("should insert a follower-following pair when it is valid", done => {
     request(app)
-      .post("/follow")
+      .post("/user/follow")
       .send(dummyFollows[0])
       .expect(201)
       .expect(res => {
@@ -233,7 +256,7 @@ describe("POST /follow", () => {
 
   it("should return error when inserting already present pair", done => {
     request(app)
-      .post("/follow")
+      .post("/user/follow")
       .send(dummyFollows[1])
       .expect(500)
       .expect(res => {
@@ -251,7 +274,7 @@ describe("POST /follow", () => {
       .expect(200)
       .expect(res => {
         expect(res.body.count).toBe(1);
-        expect(res.body.followers[0].username).toBe(dummyFollows[1].follower);
+        expect(res.body.followers[0].userId).toBe(dummyFollows[1].follower);
       })
       .end((err, res) => {
         if (err) return done(err);
@@ -265,7 +288,7 @@ describe("POST /follow", () => {
       .expect(200)
       .expect(res => {
         expect(res.body.count).toBe(1);
-        expect(res.body.following[0].username).toBe(dummyFollows[1].following);
+        expect(res.body.following[0].userId).toBe(dummyFollows[1].following);
       })
       .end((err, res) => {
         if (err) return done(err);

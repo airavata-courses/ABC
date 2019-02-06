@@ -1,3 +1,7 @@
+const _ = require("lodash");
+const uuidv4 = require("uuid/v4");
+const bcrypt = require("bcrypt-nodejs");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.import("../models/user");
 
@@ -7,8 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     // Returns a promise
     create: params => {
       return User.create({
-        username: params.username,
-        name: params.name,
+        userId: params.userId || uuidv4(),
+        userName: params.userName,
+        password: bcrypt.hashSync(params.password),
+        firstName: params.firstName,
+        lastName: params.lastName,
         bio: params.bio,
         dob: Date.parse(params.dob),
         location: params.location
@@ -23,13 +30,13 @@ module.exports = (sequelize, DataTypes) => {
 
     update: params => {
       return User.update(params, {
-        where: { username: params.username },
+        where: { userId: params.userId },
         returning: true
       });
     },
 
     delete: params => {
-      return User.destroy({ where: params });
+      return User.destroy({ where: { userId: params.userId } });
     },
 
     // Deletes all the records from 'users' collection. Does not delete the table
