@@ -100,7 +100,7 @@ app.delete("/user", (req, res) => {
 // end of user routes
 
 // follow create, delete, get followers, get following routes
-app.post("/follow", (req, res) => {
+app.post("/user/follow", (req, res) => {
   if (!req.body.follower || !req.body.following) return res.status(400).send();
   FollowController.create(req.body)
     .then(follow => {
@@ -111,7 +111,7 @@ app.post("/follow", (req, res) => {
     });
 });
 
-app.delete("/follow", (req, res) => {
+app.delete("/user/follow", (req, res) => {
   if (!req.body.follower || !req.body.following) return res.status(400).send();
   FollowController.delete(req.body)
     .then(result => {

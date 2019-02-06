@@ -234,7 +234,7 @@ describe("DELETE /user", () => {
 describe("POST /follow", () => {
   it("should insert a follower-following pair when it is valid", done => {
     request(app)
-      .post("/follow")
+      .post("/user/follow")
       .send(dummyFollows[0])
       .expect(201)
       .expect(res => {
@@ -249,7 +249,7 @@ describe("POST /follow", () => {
 
   it("should return error when inserting already present pair", done => {
     request(app)
-      .post("/follow")
+      .post("/user/follow")
       .send(dummyFollows[1])
       .expect(500)
       .expect(res => {

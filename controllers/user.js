@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const uuidv4 = require("uuid/v4");
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.import("../models/user");
@@ -9,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     // Returns a promise
     create: params => {
       return User.create({
-        userId: params.userId,
+        userId: uuidv4(),
         userName: params.userName,
         name: params.name,
         bio: params.bio,
