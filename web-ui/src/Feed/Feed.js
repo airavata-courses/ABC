@@ -4,7 +4,8 @@ import NewPost from '../NewPost/NewPost';
 import NewsColumn from '../News/NewsColumn'
 import { Link } from 'react-router-dom';
 import { FeedPost } from './FeedPost';
-import { fetchPosts, deletePost } from '../_actions/post.actions';
+import { fetchPosts, deletePost } from '../_actions';
+import { fetchNews } from '../_actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './styles.css';
@@ -12,13 +13,14 @@ import './styles.css';
 class Feed extends Component{
 
     componentWillMount() {
-        this.props.fetchPosts(this.props.user.id)
+        // :w
+        this.props.fetchPosts(this.props.user.id);
+        this.props.fetchNews();
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.newPost) {
-            console.log("Component will receive");
-            // this.props.posts.unshift(nextProps.newPost);
+            this.props.posts.unshift(nextProps.newPost);
         }
     }
     incrementLike (id, username) {
@@ -31,6 +33,8 @@ class Feed extends Component{
     }
 
     render() {
+        console.log("FEED Render");
+        console.log(this.props);
         const postItems = this.props.posts.map(
             post => (
                 <FeedPost key={post.id}
@@ -42,6 +46,7 @@ class Feed extends Component{
             )
         )
         return (
+
             <div className="row">
 
                 {/* Keys passed just to get rid of error. No actual user.*/}
@@ -67,8 +72,9 @@ class Feed extends Component{
                     <br />
                     {postItems}
                 </div>
+                                
                 <div className="col-4">
-                    <NewsColumn key={this.props.user.id}/>
+                    <NewsColumn key={this.props.user.id} user={this.props.user} data={this.props.news.news} />
                 </div>
             </div>
         );
@@ -78,16 +84,18 @@ class Feed extends Component{
 
 Feed.propTypes = {
     fetchPosts: PropTypes.func.isRequired,
+    fetchNews: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired,
     newPost: PropTypes.object
 };
 
 const mapStateToProps = state => ({
+    news: state.news.news,
     posts: state.posts.items,
     newPost: state.posts.item,
     user: state.authentication.user
 });
 
 
-const connectedFeed = connect(mapStateToProps, { fetchPosts })(Feed);
+const connectedFeed = connect(mapStateToProps, { fetchPosts, fetchNews })(Feed);
 export { connectedFeed as Feed };
