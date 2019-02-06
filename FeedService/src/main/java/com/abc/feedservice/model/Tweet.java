@@ -3,6 +3,7 @@ package com.abc.feedservice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 
 @Document(collection = "tweets")
-public class Tweet {
+public class Tweet implements Serializable {
 
     @Id
     private String id;
