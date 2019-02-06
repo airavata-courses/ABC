@@ -1,5 +1,5 @@
 import { searchConstants } from '../_constants'
-
+import { USER_URL } from '../_constants'
 // Rough implementation. Untested.
 function timeout(ms, promise) {
     return new Promise(function(resolve, reject) {
@@ -11,10 +11,11 @@ function timeout(ms, promise) {
 }
 
 export function searchUsers(usersearch) {
+    console.log(usersearch); 
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${usersearch}`))
-        timeout(1000, fetch('https://jsonplaceholder.typicode.com/posts'))
+        timeout(1000, fetch(`${USER_URL}/user/search/${usersearch}`))
             .then(res => res.json())
             .then(users => dispatch({
                 type: searchConstants.SEARCH_USER,
@@ -28,7 +29,7 @@ export function searchUsers(usersearch) {
 export function searchFollowers(userid) {
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
-        
+
         timeout(1000, fetch('https://jsonplaceholder.typicode.com/posts'))
             .then(res => res.json())
             .then(users => dispatch({
@@ -44,7 +45,7 @@ export function searchFollowing(userid) {
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${userid}`))
-        
+
         timeout(1000, fetch('https://jsonplaceholder.typicode.com/posts'))
             .then(res => res.json())
             .then(users => dispatch({

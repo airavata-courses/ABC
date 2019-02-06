@@ -4,8 +4,6 @@ import './styles.css';
 
 class NewsColumn extends Component {
     render() {
-        console.log("From column")
-        console.log(this.props); 
         if(this.props.data === undefined) {
             return (
                 <div></div>

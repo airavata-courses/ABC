@@ -6,7 +6,7 @@ export function PopulateUser (props) {
         <div className="card border-dark mb-3">
             <div className="card-header PostUserInfo">
                 <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg" alt="User Placeholder" className ="img-thumbnail rounded-circle" width="50" height="50"/>
-                <h5 style={{ padding: 10 }}>{props.data.title}</h5>
+                <h5 style={{ padding: 10 }}>{props.data.firstName} {props.data.lastName}</h5>
             </div>
 
             <div className="card-body">
