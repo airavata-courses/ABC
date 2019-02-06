@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 
 // setup fake backend
 import { configureFakeBackend } from './_helpers';
-configureFakeBackend();
+    configureFakeBackend();
 
 render(
     <Provider store={store}>

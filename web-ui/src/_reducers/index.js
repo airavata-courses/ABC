@@ -4,13 +4,15 @@ import postReducer from './post.reducer'
 import authentication from './authentication.reducer'
 import registration from './registration.reducer'
 import users from './user.reducer'
+import searchReducer from './search.reducer'
 
 const rootReducer = combineReducers({
     posts: postReducer,
     alert: alertReducer,
     authentication: authentication,
     registration: registration,
-    users: users
+    users: users,
+    search_result: searchReducer
 });
 
 export default rootReducer;
