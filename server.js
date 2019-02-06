@@ -52,7 +52,11 @@ app.post("/user", (req, res) => {
 
   UserController.create(req.body)
     .then(user => {
-      res.status(201).send({ user });
+      delete user.dataValues.password;
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(201)
+        .send({ user });
     })
     .catch(error => {
       if (error.name === "SequelizeUniqueConstraintError")
@@ -68,7 +72,10 @@ app.get("/user/:userId", (req, res) => {
   UserController.find({ userId })
     .then(user => {
       if (user.length == 0) return res.status(404).send();
-      res.status(200).send({ user: user[0] });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(200)
+        .send({ user: user[0] });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -90,7 +97,10 @@ app.patch("/user", (req, res) => {
   UserController.update(params)
     .then(result => {
       if (result[1] === 0) return res.status(404).send();
-      res.status(200).send({ user: result[0] });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(200)
+        .send({ user: result[0] });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -104,7 +114,10 @@ app.delete("/user", (req, res) => {
   UserController.delete({ userId })
     .then(result => {
       if (result === 0) return res.status(404).send();
-      res.status(202).send({ deletedCount: result });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(202)
+        .send({ deletedCount: result });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -117,7 +130,10 @@ app.post("/user/follow", (req, res) => {
   if (!req.body.follower || !req.body.following) return res.status(400).send();
   FollowController.create(req.body)
     .then(follow => {
-      res.status(201).send({ follow });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(201)
+        .send({ follow });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -128,7 +144,10 @@ app.delete("/user/follow", (req, res) => {
   if (!req.body.follower || !req.body.following) return res.status(400).send();
   FollowController.delete(req.body)
     .then(result => {
-      res.status(202).send({ deletedCount: result[1] });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(202)
+        .send({ deletedCount: result[1] });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -140,15 +159,18 @@ app.get("/user/:userId/followers", (req, res) => {
   if (!userId) return res.status(400).send();
   FollowController.find({ following: userId })
     .then(result => {
-      res.status(200).send({
-        count: result.length,
-        followers: _.map(result, item => {
-          return {
-            userId: item.follower,
-            createdAt: item.createdAt
-          };
-        })
-      });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(200)
+        .send({
+          count: result.length,
+          followers: _.map(result, item => {
+            return {
+              userId: item.follower,
+              createdAt: item.createdAt
+            };
+          })
+        });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -160,15 +182,18 @@ app.get("/user/:userId/following", (req, res) => {
   if (!userId) return res.status(400).send();
   FollowController.find({ follower: userId })
     .then(result => {
-      res.status(200).send({
-        count: result.length,
-        following: _.map(result, item => {
-          return {
-            userId: item.following,
-            createdAt: item.createdAt
-          };
-        })
-      });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(200)
+        .send({
+          count: result.length,
+          following: _.map(result, item => {
+            return {
+              userId: item.following,
+              createdAt: item.createdAt
+            };
+          })
+        });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -179,6 +204,7 @@ app.get("/user/:userId/following", (req, res) => {
 // user search route
 app.get("/user/search/:searchQuery", (req, res) => {
   var searchQuery = req.params.searchQuery;
+
   if (!searchQuery)
     return res
       .status(400)
@@ -187,7 +213,13 @@ app.get("/user/search/:searchQuery", (req, res) => {
     userName: { [Sequelize.Op.like]: "%" + searchQuery + "%" }
   })
     .then(searchResult => {
-      res.status(200).send({ searchResult });
+      searchResult.forEach(result => {
+        delete result.dataValues.password;
+      });
+      res
+        .set("Authorization", "Bearer fake-jwt-token")
+        .status(200)
+        .send({ count: searchResult.length, searchResult });
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -208,10 +240,12 @@ app.post("/user/login", (req, res) => {
       .status(400)
       .send({ error: { name: "password is not specified" } });
   UserController.find({ userName }).then(user => {
-    console.log(user);
     if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
       return res.status(400).send({ error: { name: "Invalid credentials" } });
-    res.status(200).send("Success");
+    res
+      .set("Authorization", "Bearer fake-jwt-token")
+      .status(200)
+      .send({ message: "Success" });
   });
 });
 // end of login
