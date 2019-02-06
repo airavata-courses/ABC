@@ -37,7 +37,7 @@ class Search extends Component {
         // console.log("Search.js: Printin props from onSubmit");
         // console.log(this.props);
         const postData = {
-            userSearch: this.state.userSearch,
+            searchQuery: this.state.userSearch,
             userId:  this.props.user.id
         };
 
