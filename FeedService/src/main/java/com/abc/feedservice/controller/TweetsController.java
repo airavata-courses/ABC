@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,8 @@ public class TweetsController {
     @CrossOrigin
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createTweet(@RequestBody Tweet tweet) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(tweet != null && tweet.getUserId() != null){
             tweet.setDateCreated(new Date());
             tweet.setLikeCount(0);
@@ -41,7 +44,7 @@ public class TweetsController {
 
             if(savedTweet != null) {
                 logger.info("Tweet Saved : " + objectMapper.writeValueAsString(tweet));
-                return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), HttpStatus.OK);
+                return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), headers, HttpStatus.OK);
             }
         }
         logger.error("Null Tweet creation attempted with body "  + objectMapper.writeValueAsString(tweet));
@@ -52,12 +55,14 @@ public class TweetsController {
     @CrossOrigin
     @RequestMapping(value = "/getByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getTweetsByUserId(@PathVariable String userId) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if (userId != null && userId.length() > 0) {
             List<Tweet> tweets = tweetRepository.getTweetsByUserIdOrderByDateCreatedDesc(userId);
 
             logger.info("Tweets retrieved successfully for user Id : " + userId);
 
-            return new ResponseEntity<>(objectMapper.writeValueAsString(tweets), HttpStatus.OK);
+            return new ResponseEntity<>(objectMapper.writeValueAsString(tweets), headers, HttpStatus.OK);
         } else {
             logger.error("Invalid user id");
             return new ResponseEntity<>(objectMapper.writeValueAsString("Invalid User id"), HttpStatus.BAD_REQUEST);
@@ -68,12 +73,14 @@ public class TweetsController {
     @CrossOrigin
     @RequestMapping(value = "/updateTweet", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateTweet(@RequestBody Tweet tweet) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(tweet != null && tweet.getId() != null){
             Tweet updatedTweet = tweetRepository.save(tweet);
 
             if(updatedTweet != null) {
                 logger.info("Tweet updated successfully");
-                return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), HttpStatus.OK);
+                return new ResponseEntity<>(objectMapper.writeValueAsString(tweet), headers, HttpStatus.OK);
             }
         }
         logger.error("Tweet modification failed for tweet : "+ objectMapper.writeValueAsString(tweet));
@@ -84,6 +91,8 @@ public class TweetsController {
     @CrossOrigin
     @RequestMapping(value = "/deleteByTweetId/{tweetId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> deleteTweet(@PathVariable String tweetId) throws JsonProcessingException{
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(tweetId != null && tweetId.length() > 0){
             Tweet tweet = tweetRepository.findById(tweetId).orElse(null);
 
@@ -96,7 +105,7 @@ public class TweetsController {
 
             logger.info("Tweet deleted successfully");
 
-            return new ResponseEntity<>(objectMapper.writeValueAsString("Tweet deleted successfully"), HttpStatus.OK);
+            return new ResponseEntity<>(objectMapper.writeValueAsString("Tweet deleted successfully"), headers, HttpStatus.OK);
         }
         else{
             logger.error("Tweet deletion unsuccessful");

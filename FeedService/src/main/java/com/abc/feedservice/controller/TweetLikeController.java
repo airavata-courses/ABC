@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,8 @@ public class TweetLikeController {
     @CrossOrigin
     @RequestMapping(value = "/tweetLike/{userId}/{tweetId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> likeTweet(@PathVariable String userId, @PathVariable String tweetId) throws JsonProcessingException{
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(userId != null && tweetId != null){
             //Update like Count
             Tweet tweet = tweetRepository.getTweetById(tweetId);
@@ -50,7 +53,7 @@ public class TweetLikeController {
             TweetLike savedLike = tweetLikeRepository.save(tweetLike);
             if(savedLike != null) {
                 logger.info("User Tweet like entry saved");
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(headers, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -63,6 +66,8 @@ public class TweetLikeController {
     @CrossOrigin
     @RequestMapping(value = "/tweetUnlike/{userId}/{tweetId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> unlikeTweet(@PathVariable String userId, @PathVariable String tweetId) throws JsonProcessingException{
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(userId != null && tweetId != null){
             //Update like Count
             Tweet tweet = tweetRepository.getTweetById(tweetId);
@@ -75,7 +80,7 @@ public class TweetLikeController {
             tweetLikeRepository.delete(tweetLike);
             logger.info("User Tweet like entry removed");
 
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(headers, HttpStatus.OK);
         }
         else{
             logger.error("Invalid initials passed with userId "+  userId + " and tweetId : " +  tweetId );
@@ -86,10 +91,12 @@ public class TweetLikeController {
     @CrossOrigin
     @RequestMapping(value = "/getByUserId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getLikesByUserId(@PathVariable String userId) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(userId != null){
             List<TweetLike> likes = tweetLikeRepository.getTweetLikesByUserId(userId);
             logger.info("Likes retrieved for user id : "+ userId);
-            return new ResponseEntity<>(objectMapper.writeValueAsString(likes), HttpStatus.OK);
+            return new ResponseEntity<>(objectMapper.writeValueAsString(likes), headers, HttpStatus.OK);
         }
         else{
             logger.error("Invalid User id" + userId);
@@ -100,10 +107,12 @@ public class TweetLikeController {
     @CrossOrigin
     @RequestMapping(value = "/getByTweetId/{tweetId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getLikesByTweetId(@PathVariable String tweetId) throws JsonProcessingException{
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization","Bearer fake-jwt-token");
         if(tweetId != null){
             List<TweetLike> likes = tweetLikeRepository.getTweetLikesByTweetId(tweetId);
             logger.info("Likes retrieved for tweet id : "+ tweetId);
-            return new ResponseEntity<>(objectMapper.writeValueAsString(likes), HttpStatus.OK);
+            return new ResponseEntity<>(objectMapper.writeValueAsString(likes), headers, HttpStatus.OK);
         }
         else{
             logger.error("Invalid Tweet Id" + tweetId);
