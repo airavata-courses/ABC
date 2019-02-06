@@ -17,7 +17,11 @@ export default function (state = initialState, action) {
                 ...state,
                 item: action.payload
             };
-            
+        case postConstants.DELETE_POST:
+            return{
+                ...state,
+                item: action.payload
+            };
         default:
             return state;
     }

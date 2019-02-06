@@ -2,11 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import './index.css';
-import App from './App';
+import { App } from './App/App';
 import store from './_helpers/store'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 
+// setup fake backend
+// import { configureFakeBackend } from './_helpers';
+//     configureFakeBackend();
 
 render(
     <Provider store={store}>

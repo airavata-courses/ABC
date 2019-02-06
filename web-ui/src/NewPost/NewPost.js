@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createPost } from '../_actions/postActions';
+import { createPost } from '../_actions/post.actions';
 
 class NewPost extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            body: "" 
+            tweetText: ""
         };
 
         this.onChange = this.onChange.bind(this);
@@ -15,7 +15,7 @@ class NewPost extends Component{
     }
 
     onChange(e) {
-        this.setState({   
+        this.setState({
             [e.target.name]: e.target.value
         });
     }
@@ -23,14 +23,23 @@ class NewPost extends Component{
     onSubmit(e) {
         e.preventDefault();
 
+        console.log("NewPost: Printing propr");
+        console.log(this.props);
         const post = {
-            title: "Dummy",
-            body: this.state.body
+            userId: this.props.user.id,
+            userName: this.props.user.username,
+            tweetText: this.state.tweetText
         };
-        
-        this.props.createPost(post);
-         
+
+        // setTimeOut( function() {
+            this.props.createPost(post);
+        // }, 1000);
+
     }
+    componentDidCatch(error, info) {
+        console.log(error);
+        console.log(info);
+    } 
     render() {
         return (
             <form onSubmit={this.onSubmit}>
@@ -40,17 +49,17 @@ class NewPost extends Component{
                             Create new post ...
                         </div>
                     </div>
-                    
+
                     { /*onChange="" */}
                     <input  className="form-control"
-                        name="body"
+                        name="tweetText"
                         type="text"
-                        value={this.state.body}
+                        value={this.state.tweetText}
                         onChange={this.onChange}
                         aria-label="New Post"
                         size="140"
                     />
-                    
+
                     { /*onClick="" */}
                     <button className="btn btn-primary"
                         name="buttontweet"
@@ -67,4 +76,8 @@ NewPost.propTypes = {
     createPost: PropTypes.func.isRequired
 }
 
-export default connect(null, { createPost })(NewPost);
+const mapStateToProps = state => ({
+    user: state.authentication.user
+});
+
+export default connect(mapStateToProps, { createPost })(NewPost);
