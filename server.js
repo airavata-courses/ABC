@@ -162,15 +162,16 @@ app.get("/user/:userId/followers", (req, res) => {
       res
         .set("Authorization", "Bearer fake-jwt-token")
         .status(200)
-        .send({
-          count: result.length,
-          followers: _.map(result, item => {
+        .send(
+          _.map(result, item => {
             return {
               userId: item.follower,
+              firstName: item.firstName,
+              lastName: item.lastName,
               createdAt: item.createdAt
             };
           })
-        });
+        );
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -185,15 +186,16 @@ app.get("/user/:userId/following", (req, res) => {
       res
         .set("Authorization", "Bearer fake-jwt-token")
         .status(200)
-        .send({
-          count: result.length,
-          following: _.map(result, item => {
+        .send(
+          _.map(result, item => {
             return {
               userId: item.following,
+              firstName: item.firstName,
+              lastName: item.lastName,
               createdAt: item.createdAt
             };
           })
-        });
+        );
     })
     .catch(error => {
       res.status(500).send({ error });
@@ -201,31 +203,70 @@ app.get("/user/:userId/following", (req, res) => {
 });
 // end of follow routes
 
-// user search route
-app.get("/user/search/:searchQuery", (req, res) => {
-  var searchQuery = req.params.searchQuery;
+// // user search route
+// app.get("/user/search/:searchQuery", (req, res) => {
+//   var searchQuery = req.params.searchQuery;
+//   console.log(searchQuery);
+
+//   if (!searchQuery)
+//     return res
+//       .status(400)
+//       .send({ error: { name: "searchQuery is not specified" } });
+//   UserController.find({
+//     userName: { [Sequelize.Op.like]: "%" + searchQuery + "%" }
+//   })
+//     .then(searchResult => {
+//       searchResult.forEach(result => {
+//         delete result.dataValues.password;
+//         result.dataValues.following = true;
+//       });
+//       res
+//         .set("Authorization", "Bearer fake-jwt-token")
+//         .status(200)
+//         .send(searchResult);
+//     })
+//     .catch(error => {
+//       res.status(500).send({ error });
+//     });
+// });
+// end of user search route
+
+app.get("/user/search", (req, res) => {
+  var searchQuery = req.body.searchQuery;
+  var userId = req.body.userId;
 
   if (!searchQuery)
     return res
       .status(400)
       .send({ error: { name: "searchQuery is not specified" } });
+  if (!userId)
+    return res.status(400).send({ error: { name: "userId is not specified" } });
+
   UserController.find({
     userName: { [Sequelize.Op.like]: "%" + searchQuery + "%" }
   })
     .then(searchResult => {
-      searchResult.forEach(result => {
-        delete result.dataValues.password;
+      FollowController.find({ follower: userId }).then(users => {
+        followingList = Object.values(users.map(v => v.dataValues.following));
+        console.log(typeof followingList);
+
+        searchResult.forEach(result => {
+          delete result.dataValues.password;
+          result.dataValues.following = followingList.includes(
+            result.dataValues.userId
+          );
+        });
+
+        res
+          .set("Authorization", "Bearer fake-jwt-token")
+          .status(200)
+          .send(searchResult);
       });
-      res
-        .set("Authorization", "Bearer fake-jwt-token")
-        .status(200)
-        .send({ count: searchResult.length, searchResult });
     })
     .catch(error => {
       res.status(500).send({ error });
     });
 });
-// end of user search route
 
 // login
 app.post("/user/login", (req, res) => {
@@ -242,10 +283,14 @@ app.post("/user/login", (req, res) => {
   UserController.find({ userName }).then(user => {
     if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
       return res.status(400).send({ error: { name: "Invalid credentials" } });
+    user = user[0];
+    delete user.dataValues.password;
+    user.dataValues.id = user.dataValues.userId;
+    delete user.dataValues.userId;
     res
       .set("Authorization", "Bearer fake-jwt-token")
       .status(200)
-      .send({ message: "Success" });
+      .send(user);
   });
 });
 // end of login
