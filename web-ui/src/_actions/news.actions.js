@@ -1,5 +1,5 @@
 import { newsConstants } from '../_constants'
-
+import { NEWS_URL } from  '../_constants'
 // Rough implementation. Untested.
 function timeout(ms, promise) {
     return new Promise(function(resolve, reject) {
@@ -13,7 +13,7 @@ function timeout(ms, promise) {
 export function fetchNews () {
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
-        timeout(5000, fetch(`http://absheth-dev.grnoc.iu.edu:5000/top_headlines`))
+        timeout(5000, fetch(`${NEWS_URL}/top_headlines`))
             .then(res => res.json())
             .then(news => dispatch({
                 type: newsConstants.GET_NEWS,
