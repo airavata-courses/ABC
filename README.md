@@ -137,7 +137,9 @@ Response Body:
         "firstName": "James",
         "lastName": "Doe",
         "createdAt": "2019-02-06T04:38:58.000Z"
-    }
+    },
+    .
+    .
 ]
 ```
 
@@ -146,23 +148,22 @@ Response Body:
 GET http://localhost:3000/user/a23f3ff1-4805-42bb-95be-68ec2172a2a8/following
 
 Response Body:
-{
-    "count": 2,
-    "following": [
-        {
-            "userId": "a0e96fe0-29c5-11e9-85fd-c324d3f355d6",
-            "firstName": "James",
-            "lastName": "Doe",
-            "createdAt": "2019-02-06T04:38:20.000Z"
-        },
-        {
-            "userId": "a3d42ca3-cdc4-4104-a85f-613dea768418",
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "createdAt": "2019-02-06T04:38:47.000Z"
-        }
-    ]
-}
+[
+    {
+        "userId": "a0e96fe0-29c5-11e9-85fd-c324d3f355d6",
+        "firstName": "James",
+        "lastName": "Doe",
+        "createdAt": "2019-02-06T04:38:20.000Z"
+    },
+    {
+        "userId": "a3d42ca3-cdc4-4104-a85f-613dea768418",
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "createdAt": "2019-02-06T04:38:47.000Z"
+    },
+    .
+    .
+]
 ```
 
 9. Search users by partial userName (method = GET, endpoint = '/user/search')
