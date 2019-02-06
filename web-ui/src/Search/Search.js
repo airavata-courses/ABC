@@ -39,7 +39,7 @@ class Search extends Component {
         };
 
         // setTimeOut( function() {
-        this.props.searchUsers(post);
+        this.props.searchUsers(this.state.userSearch);
         // }, 1000);
 
     }
@@ -48,10 +48,16 @@ class Search extends Component {
         console.log("in toggle follow");
     }
     render() {
-
+        console.log(this.props.users.count)
+        console.log(typeof this.props.users)
+        // if (this.props.users.length === 0) {
+        //     return (
+        //         <h1> NO USER FOUND</h1>
+        //     );
+        // }
         const populateUsers = this.props.users.map(
             user => (
-                <PopulateUser key={user.id}
+                <PopulateUser key={user.userId}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}

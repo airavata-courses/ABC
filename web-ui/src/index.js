@@ -8,8 +8,8 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 
 // setup fake backend
-import { configureFakeBackend } from './_helpers';
-    configureFakeBackend();
+// import { configureFakeBackend } from './_helpers';
+//     configureFakeBackend();
 
 render(
     <Provider store={store}>

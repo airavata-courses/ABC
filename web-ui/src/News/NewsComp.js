@@ -2,11 +2,10 @@ import React from "react";
 import "./styles.css";
 
 export function NewsComp (props) {
-    console.log("FROM NEWS-COMP"); 
-    console.log(props); 
     return(
         <div>
-                <p className="card-text text-dark">{props.data.author}</p>
+            <a className="card-text text-dark" href={props.data.url} target="_blank">{props.data.title}</a>
+            <hr/>
         </div>
     );
 }
