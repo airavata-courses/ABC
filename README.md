@@ -22,7 +22,8 @@ Response Body:
     "user": {
         "userId": "c4836160-2914-11e9-8b00-99a430df561b",
         "userName": "johndoe",
-        "name": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
         "bio": "I'm Doe...John Doe",
         "dob": "1990-01-01T05:00:00.000Z",
         "location": "New York",
@@ -41,7 +42,8 @@ Response Body:
     "user": {
         "userId": "c4836160-2914-11e9-8b00-99a430df561b",
         "userName": "johnnydoe",
-        "name": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
         "bio": "I'm Doe...John Doe",
         "dob": "1990-01-01T05:00:00.000Z",
         "location": "New York",
