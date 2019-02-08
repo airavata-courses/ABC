@@ -4,7 +4,7 @@ import { USER_URL } from '../_constants';
 export function followUser(postData) {
     console.log(postData)
     return function (dispatch) {
-        fetch(`${USER_URL}/user/follow`, {
+        fetch(`${USER_URL}/relation/user/follow`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -23,7 +23,7 @@ export function followUser(postData) {
 export function unFollowUser(postData) {
     console.log(postData)
     return function (dispatch) {
-        fetch(`${USER_URL}/user/follow`, {
+        fetch(`${USER_URL}/relation/user/follow`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
