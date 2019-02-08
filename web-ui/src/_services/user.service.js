@@ -18,7 +18,7 @@ function login(userName, password) {
         body: JSON.stringify({ userName, password })
     };
 
-    return fetch(`${USER_URL}/user/login`, requestOptions)
+    return fetch(`${USER_URL}/users/login`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -58,7 +58,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${USER_URL}/user`, requestOptions).then(handleResponse);
+    return fetch(`${USER_URL}/users/`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
