@@ -1,7 +1,7 @@
 {
   "development": {
     "host": "localhost",
-    "port": "8080",
+    "port": "8082",
     "username": "root",
     "password": "",
     "database": "node_mysql",
@@ -9,7 +9,7 @@
   },
   "test": {
     "host": "localhost",
-    "port": "8080",
+    "port": "8082",
     "username": "root",
     "password": "",
     "database": "node_mysql",
@@ -17,7 +17,7 @@
   },
   "production": {
     "host": "localhost",
-    "port": "8080",
+    "port": "8082",
     "username": "root",
     "password": "",
     "database": "node_mysql",

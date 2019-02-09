@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         firstName: params.firstName,
         lastName: params.lastName,
         bio: params.bio,
-        dob: Date.parse(params.dob),
+        dob: params.dob,
         location: params.location
       });
     },
