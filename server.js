@@ -20,6 +20,12 @@ const sequelize = new Sequelize(
 
 const app = express();
 
+const user = require("./routes/api/user.js")(sequelize);
+const follow = require("./routes/api/follow.js")(sequelize);
+
+app.use("/users", user);
+app.use("/relation", follow);
+
 sequelize.sync().then(
     () => {
         app.listen(3000, () => {
@@ -30,12 +36,6 @@ sequelize.sync().then(
         console.log("Error occurred while syncing database");
     }
 );
-
-const user = require("./routes/api/user.js")(sequelize);
-const follow = require("./routes/api/follow.js")(sequelize);
-
-app.use("/users", user);
-app.use("/relation", follow);
 
 module.exports = {
     app
