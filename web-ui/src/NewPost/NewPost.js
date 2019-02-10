@@ -21,9 +21,8 @@ class NewPost extends Component{
     }
 
     onSubmit(e) {
-        console.log("USER")
-        console.log(this.props) 
-        const post = {
+	e.preventDefault()
+	const post = {
             userId: this.props.user.id,
             userName: this.props.user.userName,
             tweetText: this.state.tweetText
