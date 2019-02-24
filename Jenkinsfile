@@ -13,7 +13,7 @@ pipeline{
 			}
 			post{
 				always{
-					junit 'target/surefire-reports/*.xml'
+					junit 'cd ./FeedService && target/surefire-reports/*.xml'
 				}
 			}
 		}
