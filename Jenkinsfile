@@ -3,14 +3,13 @@ pipeline{
 	stages{
 		stage("Build"){
 			steps{
-				sh "cd $WORKSPACE/ABC/FeedService/"
-				sh "mvn -B -DskipTests clean package"
+				sh "cd ./FeedService && mvn -B -DskipTests clean package"
 			}
 		}
 		
 		stage("Test"){
 			steps{
-				sh "mvn test"
+				sh "cd ./FeedService && mvn test"
 			}
 			post{
 				always{
