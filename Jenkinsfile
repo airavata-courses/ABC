@@ -11,11 +11,6 @@ pipeline{
 			steps{
 				sh "cd ./FeedService && mvn test"
 			}
-			post{
-				always{
-					junit 'cd ./FeedService && target/surefire-reports/*.xml'
-				}
-			}
 		}
 	}
 }
