@@ -1,8 +1,6 @@
 pipeline{
 	agent{
-		node{
-			label 'feed-service'
-		}
+		label 'feed-service'
 	}
 	stages{
 		stage("Build"){
