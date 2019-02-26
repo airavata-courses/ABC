@@ -12,7 +12,9 @@ pipeline{
 			}
 		}
 		stage('Deploy'){
-			build 'deploy-feed-service'
+			steps{
+				build 'deploy-feed-service'
+			}
 		}
 	}
 }
