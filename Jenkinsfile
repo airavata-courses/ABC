@@ -19,7 +19,9 @@ pipeline{
 			}
 		}
 		stage('Deploy'){
-			build 'deploy-news-service'
+			steps{
+				build 'deploy-news-service'
+			}
 		}
 	}
 }
