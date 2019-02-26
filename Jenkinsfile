@@ -18,5 +18,8 @@ pipeline{
 				sh "test phase"
 			}
 		}
+		stage('Deploy'){
+			build 'deploy-news-service'
+		}
 	}
 }
