@@ -23,7 +23,7 @@
     <session id="-1826866556">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.10" value="1" />
@@ -123,7 +123,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
+            <state relative-caret-position="1530">
               <caret line="102" column="31" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
             </state>
           </provider>
@@ -379,7 +379,7 @@
       <workItem from="1549751331775" duration="2579000" />
       <workItem from="1550716261440" duration="2000" />
       <workItem from="1551013348764" duration="839000" />
-      <workItem from="1551017832158" duration="359000" />
+      <workItem from="1551017832158" duration="452000" />
     </task>
     <servers />
   </component>
@@ -416,7 +416,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92897000" />
+    <option name="totallyTimeSpent" value="92990000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -640,7 +640,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
+        <state relative-caret-position="1530">
           <caret line="102" column="31" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
         </state>
       </provider>
