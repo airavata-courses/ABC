@@ -19,9 +19,13 @@ class Feed extends Component{
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.newPost) {
-            // this.props.posts.unshift(nextProps.newPost);
+	console.log("-----------------------------")
+	console.log(nextProps)
+	console.log(nextProps.newPost.length)
+        if(nextProps.newPost.id) {
+            this.props.posts.unshift(nextProps.newPost);
         }
+	console.log("-----------------------------")
     }
     incrementLike (id, username) {
         //Likes will be incremented on server

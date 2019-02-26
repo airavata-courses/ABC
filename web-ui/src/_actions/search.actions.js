@@ -10,25 +10,55 @@ function timeout(ms, promise) {
     })
 }
 
-export function searchUsers(postData) {
-    console.log(postData);
-    return function (dispatch) {
-        // fetch('https://jsonplaceholder.typicode.com/posts')
-        // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${usersearch}`))
-        timeout(1000, fetch(`${USER_URL}/user/search/`, {
-            method: 'POST',
+// export function searchUsers(postData) {
+//     console.log(postData);
+//     return function (dispatch) {
+//         // fetch('https://jsonplaceholder.typicode.com/posts')
+//         // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${usersearch}`))
+//         timeout(5000, fetch(`${USER_URL}/user/search`, {
+//             method: 'GET',
+//             headers: {
+//                 'content-type': 'application/json'
+//             },
+//             body: JSON.stringify(postData)
+//
+//         }))
+//             .then(res => res.json())
+//             .then(users => dispatch({
+//                 type: searchConstants.SEARCH_USER,
+//                 payload: users
+//             })
+//             ).catch(error => console.log("User Search: Timeout"));
+
+/* {
+            method: 'GET',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(postData)
 
-        }))
+        } */
+//     }
+// }
+
+export function searchUsers(postData) {
+    console.log(postData);
+	console.log(`${USER_URL}/users/search`)
+	const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postData)
+    };
+    return function (dispatch) {
+        // fetch('https://jsonplaceholder.typicode.com/posts')
+        // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${usersearch}`))
+        fetch(`${USER_URL}/users/search`, requestOptions )
             .then(res => res.json())
             .then(users => dispatch({
                 type: searchConstants.SEARCH_USER,
                 payload: users
             })
-            ).catch(error => console.log("User Search: Timeout"));
+            ).catch(error => console.log(error));
     }
 }
 
@@ -37,7 +67,7 @@ export function searchFollowers(userid) {
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
 
-        timeout(5000, fetch(`${USER_URL}/user/${userid}/followers`))
+        timeout(5000, fetch(`${USER_URL}/relation/user/${userid}/followers`))
             .then(res => res.json())
             .then(users => dispatch({
                 type: searchConstants.SEARCH_FOLLOWERS,
@@ -53,7 +83,7 @@ export function searchFollowing(userid) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${userid}`))
 
-        timeout(1000, fetch(`${USER_URL}/user/${userid}/followers`))
+        timeout(5000, fetch(`${USER_URL}/relation/user/${userid}/following`))
             .then(res => res.json())
             .then(users => dispatch({
                 type: searchConstants.SEARCH_FOLLOWING,

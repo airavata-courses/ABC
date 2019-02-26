@@ -1,5 +1,5 @@
 import { postConstants } from '../_constants';
-
+import { FEED_URL } from '../_constants';
 // Rough implementation. Untested.
 function timeout(ms, promise) {
     return new Promise(function(resolve, reject) {
@@ -13,7 +13,7 @@ function timeout(ms, promise) {
 export function fetchPosts(id) {
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
-        timeout(5000, fetch(`http://192.168.1.69:8080/feed/create/${id}`))
+        timeout(5000, fetch(`${FEED_URL}/feed/create/${id}`))
             .then(res => res.json())
             .then(posts => dispatch({
                 type: postConstants.FETCH_POSTS,
@@ -27,7 +27,7 @@ export function createPost(postData) {
     console.log(postData)
     return function (dispatch) {
         // fetch(  'https://jsonplaceholder.typicode.com/posts', {
-        fetch('http://192.168.1.69:8080/tweet/create/', {
+        fetch(`${FEED_URL}/tweet/create/`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -74,7 +74,7 @@ export function deletePost(postId) {
     // }
 
     return function (dispatch) {
-        fetch(`http://192.168.1.69:8080/tweet/deleteByTweetId/${postId}`, {
+        fetch(`${FEED_URL}/tweet/deleteByTweetId/${postId}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
