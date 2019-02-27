@@ -1,25 +1,25 @@
 {
   "development": {
     "host": "localhost",
-    "port": "8082",
+    "port": "3306",
     "username": "root",
-    "password": "",
+    "password": "toor",
     "database": "node_mysql",
     "dialect": "mysql"
   },
   "test": {
     "host": "localhost",
-    "port": "8082",
+    "port": "3306",
     "username": "root",
-    "password": "",
+    "password": "toor",
     "database": "node_mysql",
     "dialect": "mysql"
   },
   "production": {
     "host": "localhost",
-    "port": "8082",
+    "port": "3306",
     "username": "root",
-    "password": "",
+    "password": "toor",
     "database": "node_mysql",
     "dialect": "mysql"
   }

@@ -2,9 +2,9 @@
 
 ### User API
 
-1. Create User (method = POST, endpoint = '/user')
+1. Create User (method = POST, endpoint = '/users/')
 ```
-POST : http://localhost:3000/user
+POST : http://localhost:3000/users/
 
 Request Body:
 {
@@ -33,9 +33,9 @@ Response Body:
 }
 ```
 
-2. Get User (method = GET, endpoint = '/user/{userId}')
+2. Get User (method = GET, endpoint = '/users/{userId}')
 ```
-GET : http://localhost:3000/user/c4836160-2914-11e9-8b00-99a430df561b
+GET : http://localhost:3000/users/c4836160-2914-11e9-8b00-99a430df561b
 
 Response Body:
 {
@@ -53,9 +53,9 @@ Response Body:
 }
 ```
 
-3. Update User (method = PATCH, endpoint = '/user')
+3. Update User (method = PATCH, endpoint = '/users/')
 ```
-PATCH : http://localhost:3000/user
+PATCH : http://localhost:3000/users/
 
 Request Body:
 {
@@ -67,9 +67,9 @@ Response Body:
 {}
 ```
 
-4. Delete User (method = DELETE, endpoint = '/user')
+4. Delete User (method = DELETE, endpoint = '/users/')
 ```
-DELETE : http://localhost:3000/user
+DELETE : http://localhost:3000/users/
 
 Request Body:
 {
@@ -82,9 +82,9 @@ Response Body:
 }
 ```
 
-5. Follow User (method = POST, endpoint = '/user/follow')
+5. Follow User (method = POST, endpoint = '/relation/user/follow')
 ```
-POST : http://localhost:3000/user/follow
+POST : http://localhost:3000/relation/user/follow
 
 Request Body:
 {
@@ -104,9 +104,9 @@ Response Body:
 }
 ```
 
-6. Unfollow User (method = DELETE, endpoint = '/user/follow')
+6. Unfollow User (method = DELETE, endpoint = '/relation/user/follow')
 ```
-DELETE : http://localhost:3000/user/follow
+DELETE : http://localhost:3000/relation/user/follow
 
 Request Body: 
 {
@@ -120,9 +120,9 @@ Response Body:
 Status code: 202
 ```
 
-7. Get followers of a user (method = GET, endpoint = '/user/{userId}/followers')
+7. Get followers of a user (method = GET, endpoint = '/relation/user/{userId}/followers')
 ```
-GET http://localhost:3000/user/a23f3ff1-4805-42bb-95be-68ec2172a2a8/followers
+GET http://localhost:3000/relation/user/a23f3ff1-4805-42bb-95be-68ec2172a2a8/followers
 
 Response Body:
 [
@@ -143,9 +143,9 @@ Response Body:
 ]
 ```
 
-8. Get users following given user (method = GET, endpoint = '/user/{userId}/following')
+8. Get users following given user (method = GET, endpoint = '/relation/user/{userId}/following')
 ```
-GET http://localhost:3000/user/a23f3ff1-4805-42bb-95be-68ec2172a2a8/following
+GET http://localhost:3000/relation/user/a23f3ff1-4805-42bb-95be-68ec2172a2a8/following
 
 Response Body:
 [
@@ -166,9 +166,9 @@ Response Body:
 ]
 ```
 
-9. Search users by partial userName (method = GET, endpoint = '/user/search')
+9. Search users by partial userName (method = GET, endpoint = '/users/search')
 ```
-GET http://localhost:3000/user/search
+GET http://localhost:3000/users/search
 
 Request Body:
 {
@@ -207,9 +207,9 @@ Response Body:
 ]
 ```
 
-10. Login (method = POST, endpoint = '/user/login')
+10. Login (method = POST, endpoint = '/users/login')
 ```
-POST http://localhost:3000/user/login
+POST http://localhost:3000/users/login
 {
     "userName": "abcd",
     "password": "abcd"
