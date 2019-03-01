@@ -13,7 +13,7 @@ app.post('/send', (req, res) => {
         user: 'abc.sga2019@gmail.com',
         pass: 'abc@sga123'
     };
-    let html = `<h3>Welcome to ABC Twitter</h3>`;
+    let html = `<h3>Hi ${req.body.firstName}! Welcome to ABC Twitter</h3>`;
     var transporter = nodeMailer.createTransport({
         service: 'gmail',
         auth: {
@@ -33,10 +33,11 @@ app.post('/send', (req, res) => {
     };
 
     transporter.sendMail(mailOptions, function (err, info) {
-        if (err)
-            res.status(500).send();
-        else
-            res.status(200).send();
+        if (err) {
+            console.log('error in sending mail', err);
+            res.status(500).send(err);
+        } else
+            res.status(200).send(info);
     });
 })
 
