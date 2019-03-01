@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         password: bcrypt.hashSync(params.password),
         firstName: params.firstName,
         lastName: params.lastName,
+        email: params.email,
         bio: params.bio,
         dob: params.dob,
         location: params.location
