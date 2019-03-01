@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt-nodejs");
 var cors = require("cors");
 const Sequelize = require("sequelize");
 const emailValidator = require("email-validator");
-var request = require('request');
+const fetch = require("node-fetch");
 
 module.exports = (sequelize) => {
     app.use(bodyParser.json());
@@ -78,13 +78,20 @@ module.exports = (sequelize) => {
             .then(user => {
                 // email
                 console.log('sending: ', user.dataValues);
-                request.post('http://localhost:3002/send',
-                    { json: user.dataValues },
-                    (err, res, body) => {
-                        console.log('err', err);
-                        console.log('res', res);
-                        console.log('body', body);
-                    });
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(user.dataValues)
+                };
+
+                try {
+                    fetch(`http://localhost:3002/send`, requestOptions)
+                        .then(res => {
+                            console.log(res);
+                        });
+                } catch (err) {
+                    console.log(err);
+                }
                 return user;
             })
             .then(user => {

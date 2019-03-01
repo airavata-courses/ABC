@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": "8082",
     "username": "root",
-    "password": "",
+    "password": "toor",
     "database": "node_mysql",
     "dialect": "mysql"
   },
