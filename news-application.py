@@ -1,8 +1,12 @@
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, abort
 import requests
-import json
 from flask_cors import CORS
 import os
+import atexit
+import multiprocessing
+import consul
+import sys
+
 
 def flask_news(api_key):
 
@@ -15,13 +19,19 @@ def flask_news(api_key):
 
     @app.route("/", methods=['GET'])
     def index():
-        return "Use /top_headlines endpoint to get latest headlines from United States "
+        return "Use /top_headlines endpoint to get latest headlines from \
+            United States "
+
+    @app.route("/checkhealth", methods=['GET'])
+    def check_health():
+        return "Up and running."
 
     @app.route("/top_headlines", methods=["GET"])
     def get_news():
         """
         Top 10 news from United status
         """
+        response = ""
         try:
             r = requests.get(
                 url + "/top-headlines",
@@ -38,16 +48,63 @@ def flask_news(api_key):
             return response
 
         except Exception as e:
+            print(e)
             abort(500)
 
     return app
+
+
+def run_at_exit():
+    # deregister the service on exit
+    print("Exiting the news application")
+
+
+def register_service():
+    # Registering the service
+    print("Registering the service")
+    c = consul.Consul(host="127.0.0.1")
+    try:
+        result = c.agent.service.register(
+            "news",
+            service_id="news",
+            address="127.0.0.1",
+            port=5000,
+            check={
+                "DeregisterCriticalServiceAfter": "90s",
+                "http": "http://127.0.0.1:5000/checkhealth",
+                "interval": "5s",
+                "timeout": "1s"
+            }
+        )
+    except Exception as e:
+        print(e)
+        sys.exit()
+    result
+
+
+def consul_conn_check(host):
+    c = consul.Consul(host=host)
+    state = False
+    try:
+        c.catalog.nodes()
+        state = True
+    except ConnectionError:
+        pass
+    finally:
+        return state
+
+
+atexit.register(run_at_exit)
 
 if __name__ == "__main__":
 
     try:
         app = flask_news(os.environ["NEWS_API_KEY"])
+        process = multiprocessing.Process(target=register_service)
+        process.daemon = True
+        process.start()
         app.run(host="0.0.0.0")
 
     except KeyError as e:
+        print(e)
         print("News API key is not set in Environment variable")
-
