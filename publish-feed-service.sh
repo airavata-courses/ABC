@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -jar feedservice-*war >/dev/null 2>&1 &
+java -jar FeedService/target/feedservice-*war >/dev/null 2>&1 &
