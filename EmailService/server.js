@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const nodeMailer = require('nodemailer');
+const amqp = require('amqplib');
+const { constants } = require('./messaging/constants');
+const gmail = require('./email/gmail');
 
 const app = express();
 const cors = require('cors');
@@ -8,37 +10,29 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/send', (req, res) => {
-    let account = {
-        user: 'abc.sga2019@gmail.com',
-        pass: 'abc@sga123'
-    };
-    let html = `<h3>Hi ${req.body.firstName}! Welcome to ABC Twitter</h3>`;
-    var transporter = nodeMailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: account.user,
-            pass: account.pass
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
+amqp.connect(constants.RABBITMQ_HOST)
+    .then(conn => conn.createChannel())
+    .then(channel => {
+        channel.assertQueue(constants.EMAIL_QUEUE);
+        channel.consume(constants.EMAIL_QUEUE, message => {
+            var user = JSON.parse(message.content.toString());
+            gmail.sendWelcomeEmail(user)
+                .then(info => {
+                    console.log('Successfully sent email: ', info);
+                }, err => {
+                    console.log('Error sending email: ', email);
+                });
+        })
     });
 
-    const mailOptions = {
-        from: 'ABC Twitter', // sender address
-        to: req.body.email,// list of receivers
-        subject: req.body.subject, //line
-        html: html
-    };
-
-    transporter.sendMail(mailOptions, function (err, info) {
-        if (err) {
-            console.log('error in sending mail', err);
+app.post('/sendWelcomeEmail', (req, res) => {
+    gmail.sendWelcomeEmail(req.body.user)
+        .then(info => {
+            res.status(200).send();
+        }, err => {
+            console.log('Error sending email: ', err);
             res.status(500).send(err);
-        } else
-            res.status(200).send(info);
-    });
+        });
 })
 
 app.listen(3002, () => {
