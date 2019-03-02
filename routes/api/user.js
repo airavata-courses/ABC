@@ -6,12 +6,12 @@ const bcrypt = require("bcrypt-nodejs");
 var cors = require("cors");
 const Sequelize = require("sequelize");
 const emailValidator = require("email-validator");
-const fetch = require("node-fetch");
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, sendEmail) => {
+    console.log('exports: ', sendEmail);
+
     app.use(bodyParser.json());
     app.use(cors());
-
 
     const { UserController } = sequelize.import("../../controllers/user");
     const { FollowController } = sequelize.import("../../controllers/follow");
@@ -78,20 +78,7 @@ module.exports = (sequelize) => {
             .then(user => {
                 // email
                 console.log('sending: ', user.dataValues);
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(user.dataValues)
-                };
-
-                try {
-                    fetch(`http://localhost:3002/send`, requestOptions)
-                        .then(res => {
-                            console.log(res);
-                        });
-                } catch (err) {
-                    console.log(err);
-                }
+                sendEmail(JSON.stringify(user.dataValues));
                 return user;
             })
             .then(user => {
