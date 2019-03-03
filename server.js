@@ -35,9 +35,11 @@ const app = express();
 const sendEmail = amqp.createClientSync();
 const user = require("./routes/api/user.js")(sequelize, sendEmail);
 const follow = require("./routes/api/follow.js")(sequelize);
+const health = require("./routes/api/health.js")();
 
 app.use("/users", user);
 app.use("/relation", follow);
+app.use("/health", health);
 
 sequelize.sync().then(
     () => {
