@@ -19,7 +19,7 @@ class LikeButton extends Component {
                 onClick={() => this.incrementLike(this.props.tweetId, this.props.userId)}
                 disabled={false}>
                 <span className="badge">
-                    {this.props.likeCount} Like{this.props.likeCount == 1 ? '' : 's'}
+                    {this.props.likeCount} Claps
                 </span>
             </button>
         );
