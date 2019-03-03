@@ -301,3 +301,9 @@ describe("POST /follow", () => {
     //         });
     // });
 });
+
+describe('Fake test', () => {
+    it('does nothing', async () => {
+        process.exit(0);
+    })
+})
