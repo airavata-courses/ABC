@@ -8,8 +8,6 @@ const Sequelize = require("sequelize");
 const emailValidator = require("email-validator");
 
 module.exports = (sequelize, sendEmail) => {
-    console.log('exports: ', sendEmail);
-
     app.use(bodyParser.json());
     app.use(cors());
 

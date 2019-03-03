@@ -20,33 +20,36 @@ const sequelize = new Sequelize(
 
 const app = express();
 
-amqp.createClient()
-    .then(sendEmail => {
-        console.log('received: ', sendEmail);
+// var sendEmail;
+// amqp.createClient()
+//     .then(se => {
+//         console.log('returned');
+//         sendEmail = se;
+//     })
+//     .catch(err => {
+//         console.log('Could not connect to RabbitMQ host: ', err);
+//         process.exit(1);
+//     });
 
-        const user = require("./routes/api/user.js")(sequelize, sendEmail);
-        const follow = require("./routes/api/follow.js")(sequelize);
 
-        app.use("/users", user);
-        app.use("/relation", follow);
+const sendEmail = amqp.createClientSync();
+const user = require("./routes/api/user.js")(sequelize, sendEmail);
+const follow = require("./routes/api/follow.js")(sequelize);
 
-        sequelize.sync().then(
-            () => {
-                app.listen(3000, () => {
-                    console.log("Server started on port 3000..");
-                });
-            },
-            error => {
-                console.log("Error occurred while syncing database");
-            }
-        );
+app.use("/users", user);
+app.use("/relation", follow);
 
-        module.exports = {
-            app
-        };
-    })
-    .catch(err => {
-        console.log('Could not connect to RabbitMQ host: ', err);
-        process.exit(1);
-    });
+sequelize.sync().then(
+    () => {
+        app.listen(3000, () => {
+            console.log("Server started on port 3000..");
+        });
+    },
+    error => {
+        console.log("Error occurred while syncing database", error);
+    }
+);
 
+module.exports = {
+    app
+};
