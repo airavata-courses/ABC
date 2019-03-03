@@ -39,7 +39,7 @@ public class ApiGatewayApplication {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/health", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getHealth() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString("{ \"status\" : \"healthy\"}");
     }
