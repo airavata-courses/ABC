@@ -1,0 +1,7 @@
+{
+	"service": {
+		"name": "apigateway",
+		"port": 8081,
+		"tags": ["apigateway"]
+	}
+}
