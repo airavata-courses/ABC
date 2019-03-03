@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: zuulserver
+zuul:
+  routes:
+    feed-service:
+      path: /feed/**
+      url: http://localhost:8080/
+    news:
+      path: /news/**
+      url: http://localhost:5000/
+    users:
+      path: /users/**
+      url: http://localhost:3000/
