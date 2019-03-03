@@ -1,4 +1,5 @@
 #!/bin/sh
 
-cd web-ui && npm install && npm install --save react-scripts
+cd web-ui
+npm install
 npm start &
