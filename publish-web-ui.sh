@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd web-ui
+cd web-ui/
 npm install
-npm start &
+npm start >/dev/null 2>&1 &
