@@ -2,6 +2,12 @@
 	"service": {
 		"name": "users",
 		"port": 3000,
-		"tags": ["users"]
+		"tags": ["users"],
+		"check": {
+			"DeregisterCriticalServiceAfter": "300s",
+			"http": "http://127.0.0.1:3000",
+			"interval": "10s",
+			"timeout": "1s"
+		}
 	}
 }
