@@ -8,7 +8,7 @@ pipeline{
 		}	
 		stage('Test'){
 			steps{
-				sh 'cd ./EmailService && npm test'
+				sh 'echo test'
 			}
 		}
 	}
