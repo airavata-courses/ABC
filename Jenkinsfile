@@ -1,14 +1,14 @@
 pipeline{
 	agent any
 	stages{
-		stage("Build"){
+		stage('Build'){
 			steps{
-				sh "cd ./FeedService && mvn -B -DskipTests clean package"
+				sh 'cd ./FeedService && mvn -B -DskipTests clean package'
 			}
 		}	
-		stage("Test"){
+		stage('Test'){
 			steps{
-				sh "cd ./FeedService && mvn test"
+				sh 'cd ./FeedService && mvn test'
 			}
 		}
 		stage('Deploy'){
