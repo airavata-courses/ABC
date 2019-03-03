@@ -67,12 +67,11 @@ def register_service():
         result = c.agent.service.register(
             "news",
             service_id="news",
-            address="127.0.0.1",
             port=5000,
             check={
                 "DeregisterCriticalServiceAfter": "90s",
                 "http": "http://127.0.0.1:5000/checkhealth",
-                "interval": "5s",
+                "interval": "10s",
                 "timeout": "1s"
             }
         )
