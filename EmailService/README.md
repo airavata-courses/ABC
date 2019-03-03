@@ -1,6 +1,6 @@
 This microservice provides a rest endpoints and RabbitMQ client to deliver messages using gmail client
 
-### User API
+### Email service API
 
 1. Send Welcome email (method = POST, endpoint = '/sendWelcomeEmail/')
 ```
