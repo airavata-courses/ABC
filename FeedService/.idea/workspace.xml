@@ -68,17 +68,17 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="12" />
-          <entry key="java" value="17114" />
-          <entry key="properties" value="510" />
+          <entry key="java" value="17120" />
+          <entry key="properties" value="524" />
           <entry key="xml" value="227" />
           <entry key="yml" value="90" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="17114" />
+          <entry key="JAVA" value="17120" />
           <entry key="PLAIN_TEXT" value="12" />
-          <entry key="Properties" value="510" />
+          <entry key="Properties" value="524" />
           <entry key="XML" value="227" />
           <entry key="YAML" value="90" />
         </counts>
@@ -120,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
+            <state relative-caret-position="75">
+              <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -147,11 +147,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+            <state relative-caret-position="150">
+              <caret line="10" column="63" lean-forward="true" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -328,7 +328,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551609128817" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551610269118" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -467,7 +467,7 @@
       <workItem from="1551319167651" duration="1001000" />
       <workItem from="1551467878868" duration="135000" />
       <workItem from="1551479022038" duration="20000" />
-      <workItem from="1551508901085" duration="9767000" />
+      <workItem from="1551508901085" duration="10462000" />
     </task>
     <servers />
   </component>
@@ -504,7 +504,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104761000" />
+    <option name="totallyTimeSpent" value="105456000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -520,7 +520,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Web" order="0" sideWeight="0.5155763" side_tool="true" weight="0.2771673" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.48442367" visible="true" weight="0.2771673" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.48442367" visible="true" weight="0.2771673" />
       <window_info id="Structure" order="2" sideWeight="0.5046729" side_tool="true" weight="0.24358974" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -531,7 +531,7 @@
       <window_info anchor="bottom" id="Messages" order="1" weight="0.3291536" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.3291536" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.34378266" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.34378266" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.39916405" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -539,7 +539,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Spring" order="10" weight="0.3291536" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3291536" />
+      <window_info anchor="bottom" id="Terminal" order="12" visible="true" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="right" id="Bean Validation" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -737,16 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/FeedController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/HealthCheck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -771,17 +761,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
+        <state relative-caret-position="150">
+          <caret line="10" column="63" lean-forward="true" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/FeedController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        <state relative-caret-position="475">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
         </state>
       </provider>
     </entry>
