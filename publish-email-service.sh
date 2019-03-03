@@ -2,4 +2,4 @@
 
 cd EmailService/
 npm install
-npm start &
+nohup npm start >/dev/null 2>&1 &
