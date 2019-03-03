@@ -16,6 +16,5 @@ public class FeedServiceApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(FeedServiceApplication.class, args);
     }
-
 }
 
