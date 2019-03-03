@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="59fa3bd5-ec94-4391-8778-7bec1d5b6b4c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -44,10 +47,11 @@
           <entry key="gitignore" value="3" />
           <entry key="html" value="1" />
           <entry key="iml" value="2" />
-          <entry key="java" value="82" />
+          <entry key="java" value="84" />
           <entry key="mvnw" value="1" />
           <entry key="properties" value="11" />
           <entry key="xml" value="14" />
+          <entry key="yml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -55,26 +59,29 @@
           <entry key="CLASS" value="1" />
           <entry key="HTML" value="1" />
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="82" />
+          <entry key="JAVA" value="84" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="Properties" value="11" />
           <entry key="XML" value="14" />
+          <entry key="YAML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="12" />
-          <entry key="java" value="16988" />
-          <entry key="properties" value="418" />
-          <entry key="xml" value="225" />
+          <entry key="java" value="17077" />
+          <entry key="properties" value="491" />
+          <entry key="xml" value="227" />
+          <entry key="yml" value="90" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="16988" />
+          <entry key="JAVA" value="17077" />
           <entry key="PLAIN_TEXT" value="12" />
-          <entry key="Properties" value="418" />
-          <entry key="XML" value="225" />
+          <entry key="Properties" value="491" />
+          <entry key="XML" value="227" />
+          <entry key="YAML" value="90" />
         </counts>
       </usages-collector>
     </session>
@@ -85,10 +92,19 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/TweetsController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="243">
-              <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/TweetLikeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="108" column="32" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -96,29 +112,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/FeedController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="475">
+              <caret line="62" selection-start-line="62" selection-end-line="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/abc/feedservice/TweetLikeControllerTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -126,29 +124,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/HealthCheck.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/abc/feedservice/TweetLikeControllerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="62" selection-start-line="62" selection-end-line="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/bootstrap.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+            <state relative-caret-position="120">
+              <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -166,6 +170,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>save</find>
+      <find>consul</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,7 +194,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/model/TweetLike.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/abc/feedservice/FeedServiceApplicationTests.java" />
         <option value="$USER_HOME$/.m2/settings.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/com/abc/feedservice/TweetLikeControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/repositories/TweetLikeRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/services/Sender.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/configs/KafkaProducerConfig.java" />
@@ -204,11 +208,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/TweetsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/services/FeedService.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/abc/feedservice/FeedControllerTest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/HealthCheck.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/FeedController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/abc/feedservice/TweetLikeControllerTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/HealthCheck.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/bootstrap.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -309,11 +315,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="FeedService" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FeedService" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -328,7 +329,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551594730254" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551606614349" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -467,7 +468,7 @@
       <workItem from="1551319167651" duration="1001000" />
       <workItem from="1551467878868" duration="135000" />
       <workItem from="1551479022038" duration="20000" />
-      <workItem from="1551508901085" duration="5882000" />
+      <workItem from="1551508901085" duration="8480000" />
     </task>
     <servers />
   </component>
@@ -504,7 +505,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100876000" />
+    <option name="totallyTimeSpent" value="103474000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -520,7 +521,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Web" order="0" sideWeight="0.5155763" side_tool="true" weight="0.2771673" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.48442367" visible="true" weight="0.2771673" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.48442367" visible="true" weight="0.2771673" />
       <window_info id="Structure" order="2" sideWeight="0.5046729" side_tool="true" weight="0.24358974" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -531,7 +532,7 @@
       <window_info anchor="bottom" id="Messages" order="1" weight="0.3291536" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.3291536" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.34378266" />
+      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.34378266" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.39916405" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -539,7 +540,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Spring" order="10" weight="0.3291536" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.3291536" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="right" id="Bean Validation" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -646,13 +647,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/services.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/services/TweetService.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/TweetLikeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4">
-          <caret line="83" column="9" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/model/Tweet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -713,27 +707,6 @@
     <entry file="file://$PROJECT_DIR$/target/site/jacoco/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/abc/feedservice/TweetLikeControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/abc/feedservice/FeedServiceApplicationTests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -741,17 +714,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/HealthCheck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/FeedController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="150">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -761,20 +727,62 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/TweetsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
-          <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/HealthCheck.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/TweetLikeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        <state relative-caret-position="358">
+          <caret line="108" column="32" selection-start-line="108" selection-start-column="10" selection-end-line="108" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/abc/feedservice/TweetLikeControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bootstrap.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/controller/FeedController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
         </state>
       </provider>
     </entry>
