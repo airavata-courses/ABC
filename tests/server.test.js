@@ -303,7 +303,7 @@ describe("POST /follow", () => {
 });
 
 describe('Fake test', () => {
-    it('does nothing', async () => {
+    it('does nothing', () => {
         process.exit(0);
-    })
-})
+    });
+});
