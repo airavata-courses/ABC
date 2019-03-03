@@ -1,6 +1,4 @@
 # ABC
+[![Build Status](http://149.165.156.122:8080/buildStatus/icon?job=develop-api-gateway)](http://149.165.156.122:8080/job/develop-api-gateway/)
 
-Welcome to twitter-like application!
-Our web application emulates basic twitter functionalities where users can post a tweet or follow/unfollow other users. Also you can get latest news on your home page.
-
-Please go through the [Wiki](https://github.com/airavata-courses/ABC/wiki) page for the setup process
+API Gateway for microservices. Its Zuul Proxy based router to manage API calls triggered by users and route them to appropriate services in the environment

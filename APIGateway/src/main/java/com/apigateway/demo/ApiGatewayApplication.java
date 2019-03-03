@@ -12,7 +12,6 @@ import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
 @EnableZuulProxy
-@CrossOrigin(origins = "*")
 @RestController
 public class ApiGatewayApplication {
 
