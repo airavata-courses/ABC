@@ -10,12 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.5.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "deasync": "^0.1.14",
+    "email-validator": "^2.0.4",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "mysql2": "^1.6.4",
+    "request": "^2.88.0",
     "sequelize": "^4.42.0",
     "uuid": "^3.3.2"
   },
