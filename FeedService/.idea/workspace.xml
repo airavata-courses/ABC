@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="59fa3bd5-ec94-4391-8778-7bec1d5b6b4c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/abc/feedservice/FeedServiceApplication.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -329,7 +328,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551586804671" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551587831359" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -468,7 +467,7 @@
       <workItem from="1551319167651" duration="1001000" />
       <workItem from="1551467878868" duration="135000" />
       <workItem from="1551479022038" duration="20000" />
-      <workItem from="1551508901085" duration="4851000" />
+      <workItem from="1551508901085" duration="5089000" />
     </task>
     <servers />
   </component>
@@ -505,7 +504,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99845000" />
+    <option name="totallyTimeSpent" value="100083000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -518,10 +517,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Web" order="0" sideWeight="0.5155763" side_tool="true" weight="0.2771673" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.48442367" visible="true" weight="0.2771673" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.48442367" visible="true" weight="0.2771673" />
       <window_info id="Structure" order="2" sideWeight="0.5046729" side_tool="true" weight="0.24358974" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -540,7 +538,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Spring" order="10" weight="0.3291536" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3291536" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="right" id="Bean Validation" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
