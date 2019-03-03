@@ -4,6 +4,7 @@ spring:
   application:
     name: zuulserver
 zuul:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
   routes:
     feed-service:
       path: /feed/**
