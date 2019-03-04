@@ -28,7 +28,7 @@ class Search extends Component {
 
     // componentWillReceiveProps(nextProps) {
     //     console.log("componentwillreceiveprops");
-    //         console.log(nextProps);
+    //         console.log(nextProps);    
     // }
 
     onSubmit(e) {
