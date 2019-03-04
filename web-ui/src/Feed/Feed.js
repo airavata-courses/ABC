@@ -22,9 +22,9 @@ class Feed extends Component {
         console.log("-----------------------------")
         console.log(nextProps)
         console.log(nextProps.newPost.length)
-        if (nextProps.newPost.id) {
-            this.props.posts.unshift(nextProps.newPost);
-        }
+        // if (nextProps.newPost.id) {
+        //     this.props.posts.unshift(nextProps.newPost);
+        // }
         console.log("-----------------------------")
     }
 
