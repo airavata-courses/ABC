@@ -44,6 +44,12 @@ export default function users(state = {}, action) {
                     return user;
                 })
             };
+	case userConstants.LOGOUT:
+            // remove deleted user from state
+            return {
+		...state,
+               	undefinded
+            };
         default:
             return state
     }
