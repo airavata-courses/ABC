@@ -1,4 +1,5 @@
-# ABC - Feed Service [![Build Status](http://149.165.156.122:8080/buildStatus/icon?job=develop-feed-service)](http://149.165.156.122:8080/job/develop-feed-service/)
+# ABC - Feed Service 
+[![Build Status](http://149.165.156.122:8080/buildStatus/icon?job=develop-feed-service)](http://149.165.156.122:8080/job/develop-feed-service/)
 
 This microservice will help users manage tweets and generate the feed based on users they follow. 
 
