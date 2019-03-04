@@ -48,7 +48,7 @@ export default function users(state = {}, action) {
             // remove deleted user from state
             return {
 		...state,
-		{}
+		items: {}
             };
         default:
             return state
