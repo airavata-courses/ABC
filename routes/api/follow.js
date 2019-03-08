@@ -30,6 +30,7 @@ module.exports = (sequelize) => {
 
     app.delete("/user/follow", (req, res) => {
         if (!req.body.follower || !req.body.following) return res.status(400).send();
+        console.log('in delete, req.body', req.body);
         FollowController.delete(req.body)
             .then(result => {
                 res
