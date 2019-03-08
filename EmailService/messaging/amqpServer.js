@@ -7,7 +7,7 @@ const startServer = () => {
             channel.assertQueue(constants.EMAIL_QUEUE, {durable: true});
             channel.consume(constants.EMAIL_QUEUE, message => {
                 console.log(message);
-            }, {noAck: true})
+            }, {noAck: false})
         });
 }
 
