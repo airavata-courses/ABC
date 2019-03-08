@@ -138,7 +138,7 @@ function mapStateToProps (state) {
     console.log(state);
 
     return {
-        searchusers: state.search_result.users,
+        searchusers: state.search_result.searchusers,
         user: state.authentication.user
     };
 }
