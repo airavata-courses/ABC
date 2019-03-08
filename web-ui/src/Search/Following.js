@@ -11,8 +11,18 @@ class Following extends Component {
         this.props.searchFollowing(this.props.user.id)
     }
 
-    toggleFollow () {
-        console.log("in toggle follow");
+    toggleFollow (userId, followUserId, doFollow) {
+        console.log("Following--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
+
+        const params = {
+            follower: userId,
+            following: followUserId
+        }
+        if (doFollow) {
+            this.props.followUser(params);
+        } else {
+            this.props.unFollowUser(params);
+        }
     }
     
 

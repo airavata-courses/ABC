@@ -48,7 +48,7 @@ class Search extends Component {
     }
 
     toggleFollow (userId, followUserId, doFollow) {
-        console.log("in toggle follow" + followUserId);
+        console.log("Search--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
 
         const params = {
             follower: userId,
