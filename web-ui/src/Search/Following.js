@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchFollowing } from '../_actions/search.actions'
 import { PopulateUser } from './PopulateUser'
+import { followUser, unFollowUser } from '../_actions'
 
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
@@ -65,7 +66,11 @@ class Following extends Component {
         );
     }
 }
-
+Search.propTypes = {
+    followUser: PropTypes.func.isRequired,
+    unFollowUser: PropTypes.func.isRequired,
+    searchFollowing: PropTypes.func.isRequired
+};
 function mapStateToProps (state) {
     return {
         following: state.search_result.following,
@@ -73,6 +78,6 @@ function mapStateToProps (state) {
     };
 }
 
-const connectedFollowing = connect(mapStateToProps, { searchFollowing })(Following);
+const connectedFollowing = connect(mapStateToProps, { searchFollowing, followUser, unFollowUser})(Following);
 export {connectedFollowing as Following}
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchFollowers } from '../_actions/search.actions'
+import { followUser, unFollowUser } from '../_actions'
 import { PopulateUser } from './PopulateUser'
 
 import Profile from '../components/profile';
@@ -63,6 +64,11 @@ class Followers extends Component {
         );
     }
 }
+Search.propTypes = {
+    followUser: PropTypes.func.isRequired,
+    unFollowUser: PropTypes.func.isRequired,
+    searchFollowers: PropTypes.func.isRequired
+};
 
 function mapStateToProps (state) {
     return {
@@ -71,6 +77,6 @@ function mapStateToProps (state) {
     };
 }
 
-const connectedFollower = connect(mapStateToProps, { searchFollowers })(Followers);
+const connectedFollower = connect(mapStateToProps, { searchFollowers, followUser, unFollowUser })(Followers);
 export {connectedFollower as Followers}
 
