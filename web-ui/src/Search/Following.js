@@ -15,8 +15,10 @@ class Following extends Component {
         console.log("in toggle follow");
     }
     
-    render() {
 
+    render() {
+	console.log("FOLLOWING: ");
+	console.log(this.props.following);
         const populateUsers = this.props.following.map(
             user => (
                 <PopulateUser key={user.userId}
