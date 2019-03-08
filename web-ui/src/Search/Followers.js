@@ -7,7 +7,11 @@ import PropTypes from 'prop-types';
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
 class Followers extends Component {
-
+    constructor(props) {
+        super(props);
+        this.toggleFollow = this.toggleFollow.bind(this); 
+    }
+ 
     componentWillMount() {
         this.props.searchFollowers(this.props.user.id)
     }
