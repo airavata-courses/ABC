@@ -64,7 +64,7 @@ class Followers extends Component {
         );
     }
 }
-Search.propTypes = {
+Followers.propTypes = {
     followUser: PropTypes.func.isRequired,
     unFollowUser: PropTypes.func.isRequired,
     searchFollowers: PropTypes.func.isRequired
