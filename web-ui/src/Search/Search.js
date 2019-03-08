@@ -67,7 +67,7 @@ class Search extends Component {
         //         <h1> NO USER FOUND</h1>
         //     );
         // }
-        const populateUsers = this.props.users.map(
+        const populateUsers = this.props.searchusers.map(
             user => (
                 <PopulateUser key={user.userId}
                     data={user}
@@ -138,7 +138,7 @@ function mapStateToProps (state) {
     console.log(state);
 
     return {
-        users: state.search_result.users,
+        searchusers: state.search_result.users,
         user: state.authentication.user
     };
 }
