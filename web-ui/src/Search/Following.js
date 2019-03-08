@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { searchFollowing } from '../_actions/search.actions'
 import { PopulateUser } from './PopulateUser'
 import { followUser, unFollowUser } from '../_actions'
-
+import PropTypes from 'prop-types';
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
 class Following extends Component {
