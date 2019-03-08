@@ -56,7 +56,7 @@ class Followers extends Component {
 
 function mapStateToProps (state) {
     return {
-        followers: state.search_result.users,
+        followers: state.search_result.followers,
         user: state.authentication.user
     };
 }
