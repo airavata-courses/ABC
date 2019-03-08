@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
         if (!userId) return res.status(400).send();
         sequelize
             .query(
-                'select u.userId, u.userName, u.firstName, u.lastName, u.email, g.following from users as u, (select f.follower, if(f.ifFollows IS NULL, "false", "true") as following from ( select f1.follower, f2.ifFollows from ( select follower from follows as f where f.following = "' + userId + '" ) as f1 left join ( select following as follower,TRUE as ifFollows from follows as f where f.follower = "' + userId + '") f2 on f1.follower = f2.follower) as f) as g where u.userId = g.follower;'
+                'select u.userId, u.userName, u.firstName, u.lastName, u.email, g.following from users as u, (select f.follower, if(f.ifFollows IS NULL, false, true) as following from ( select f1.follower, f2.ifFollows from ( select follower from follows as f where f.following = "' + userId + '" ) as f1 left join ( select following as follower,TRUE as ifFollows from follows as f where f.follower = "' + userId + '") f2 on f1.follower = f2.follower) as f) as g where u.userId = g.follower;'
             )
             .then(result => {
                 console.log(result);
@@ -72,7 +72,7 @@ module.exports = (sequelize) => {
             .then(result => {
                 result = result[0];
                 for (let i = 0; i < result.length; ++i)
-                    result[i]['following'] = "true";
+                    result[i]['following'] = true;
 
                 res
                     .set("Authorization", "Bearer fake-jwt-token")
