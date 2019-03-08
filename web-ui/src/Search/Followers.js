@@ -17,7 +17,7 @@ class Followers extends Component {
     
     render() {
 
-        const populateUsers = this.props.users.map(
+        const populateUsers = this.props.followers.map(
             user => (
                 <PopulateUser key={user.userId}
                     data={user}
@@ -56,7 +56,7 @@ class Followers extends Component {
 
 function mapStateToProps (state) {
     return {
-        users: state.search_result.users,
+        followers: state.search_result.users,
         user: state.authentication.user
     };
 }
