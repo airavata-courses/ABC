@@ -3,11 +3,13 @@ module.exports = (sequelize, DataTypes) => {
     follower: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
       unique: "follow_relation"
     },
     following: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
       unique: "follow_relation"
     }
   });
