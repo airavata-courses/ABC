@@ -1,0 +1,13 @@
+{
+	"service": {
+		"name": "apigateway",
+		"port": 8081,
+		"tags": ["apigateway"],
+		"check": {
+			"DeregisterCriticalServiceAfter": "300s",
+			"http": "http://127.0.0.1:8081/health",
+			"interval": "10s",
+			"timeout": "1s"
+		}
+	}
+}

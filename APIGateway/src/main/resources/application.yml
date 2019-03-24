@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: zuulserver
+zuul:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  debug:
+    request: true
+  routes:
+    feed-service:
+      path: /feed/**
+      url: http://feed.service.consul:8080/
+    news:
+      path: /news/**
+      url: http://news.service.consul:5000/
+    users:
+      path: /users/**
+      url: http://users.service.consul:3000/
