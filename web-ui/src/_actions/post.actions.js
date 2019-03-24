@@ -62,6 +62,25 @@ export function updateLikeCount(postData) {
     }
 } */
 
+export function updateLikeCount(postData) {
+    console.log('updatelikecount called with', postData);
+    console.log(` fetching: ${FEED_URL}/likes/tweetLike/${postData.userId}/${postData.tweetId}`)
+    return function (dispatch) {
+        console.log('inside function');
+        fetch(`${FEED_URL}/likes/tweetLike/${postData.userId}/${postData.tweetId}`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: ""
+        })
+            .then(res => console.log('res: ', res))
+            .then(dispatch({
+                type: postConstants.LIKE_POST,
+                payload: postData
+            }));
+    }
+}
 
 export function deletePost(postId) {
     console.log("Deleting");

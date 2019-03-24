@@ -1,7 +1,10 @@
 import { searchConstants } from '../_constants'
 
 const initialState = {
-    users: []
+    followers: [],
+    following: [],
+    searchusers: []
+
 }
 
 export default function (state = initialState, action) {
@@ -9,17 +12,17 @@ export default function (state = initialState, action) {
         case searchConstants.SEARCH_USER:
             return {
                 ...state,
-                users: action.payload
+                searchusers: action.payload
             };
         case searchConstants.SEARCH_FOLLOWERS:
             return {
                 ...state,
-                users: action.payload
+                followers: action.payload
             };
         case searchConstants.SEARCH_FOLLOWING:
             return {
                 ...state,
-                users: action.payload
+                following: action.payload
             };
         default:
             return state;

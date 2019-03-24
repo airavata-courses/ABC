@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchFollowers } from '../_actions/search.actions'
+import { followUser, unFollowUser } from '../_actions'
 import { PopulateUser } from './PopulateUser'
-
+import PropTypes from 'prop-types';
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
 class Followers extends Component {
-
+    constructor(props) {
+        super(props);
+        this.toggleFollow = this.toggleFollow.bind(this); 
+    }
+ 
     componentWillMount() {
         this.props.searchFollowers(this.props.user.id)
     }
 
-    toggleFollow () {
-        console.log("in toggle follow");
+    toggleFollow (userId, followUserId, doFollow) {
+        console.log("Followers--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
+
+        const params = {
+            follower: userId,
+            following: followUserId
+        }
+        if (doFollow) {
+            this.props.followUser(params);
+        } else {
+            this.props.unFollowUser(params);
+        }
     }
     
     render() {
 
-        const populateUsers = this.props.users.map(
+        const populateUsers = this.props.followers.map(
             user => (
                 <PopulateUser key={user.userId}
                     data={user}
@@ -53,14 +68,19 @@ class Followers extends Component {
         );
     }
 }
+Followers.propTypes = {
+    followUser: PropTypes.func.isRequired,
+    unFollowUser: PropTypes.func.isRequired,
+    searchFollowers: PropTypes.func.isRequired
+};
 
 function mapStateToProps (state) {
     return {
-        users: state.search_result.users,
+        followers: state.search_result.followers,
         user: state.authentication.user
     };
 }
 
-const connectedFollower = connect(mapStateToProps, { searchFollowers })(Followers);
+const connectedFollower = connect(mapStateToProps, { searchFollowers, followUser, unFollowUser })(Followers);
 export {connectedFollower as Followers}
 

@@ -82,7 +82,8 @@ export function searchFollowing(userid) {
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         // timeout(1000, fetch(`http://192.168.1.69:8080/tweet/getByUserId/${userid}`))
-
+	console.log("Fetching following users:");
+	console.log(userid);
         timeout(5000, fetch(`${USER_URL}/relation/user/${userid}/following`))
             .then(res => res.json())
             .then(users => dispatch({

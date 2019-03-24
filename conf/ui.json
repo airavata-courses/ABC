@@ -1,0 +1,14 @@
+{
+	"service": {
+		"name": "react",
+		"port": 3000,
+		"tags": ["userinterface"],
+		"check": {
+			"DeregisterCriticalServiceAfter": "300s",
+			"http": "http://127.0.0.1:3000",
+			"interval": "10s",
+			"timeout": "1s"
+		}
+
+	}
+}

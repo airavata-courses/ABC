@@ -4,13 +4,13 @@ import NewPost from '../NewPost/NewPost';
 import NewsColumn from '../News/NewsColumn'
 import { Link } from 'react-router-dom';
 import { FeedPost } from './FeedPost';
-import { fetchPosts, deletePost } from '../_actions';
+import { fetchPosts, deletePost, updateLikeCount } from '../_actions/post.actions';
 import { fetchNews } from '../_actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-class Feed extends Component{
+class Feed extends Component {
 
     componentWillMount() {
         // :w
@@ -19,28 +19,32 @@ class Feed extends Component{
     }
 
     componentWillReceiveProps(nextProps) {
-	console.log("-----------------------------")
-	console.log(nextProps)
-	console.log(nextProps.newPost.length)
-        if(nextProps.newPost.id) {
-            this.props.posts.unshift(nextProps.newPost);
-        }
-	console.log("-----------------------------")
+        console.log("-----------------------------")
+        console.log(nextProps)
+        console.log(nextProps.newPost.length)
+        // if (nextProps.newPost.id) {
+        //     this.props.posts.unshift(nextProps.newPost);
+        // }
+        console.log("-----------------------------")
     }
-    incrementLike (id, username) {
+
+    incrementLike(id, username) {
+        console.log('incrementLike called', this.props);
+        this.props.updateLikeCount({ id, username });
         //Likes will be incremented on server
         // this.setState({ likeCount : this.state.likeCount + 1});
     }
 
-    handleDeletePost (postId) {
+    handleDeletePost(postId) {
         deletePost(postId);
     }
 
     render() {
         const postItems = this.props.posts.map(
-            post => (
-                <FeedPost key={post.id}
-                    incrementLike={this.incrementLike}
+            (post, idx) => (
+                <FeedPost
+                    index={idx}
+                    key={post.id}
                     data={post}
                     user={this.props.user}
                     onClickDelete={this.handleDeletePost}
@@ -53,7 +57,7 @@ class Feed extends Component{
 
                 {/* Keys passed just to get rid of error. No actual user.*/}
                 <div className="col-2">
-                    <Profile key={this.props.user.id} user={this.props.user}/>
+                    <Profile key={this.props.user.id} user={this.props.user} />
                     <br />
                     <Link to="/search">
                         <button className="btn btn-block btn-info">
@@ -70,11 +74,11 @@ class Feed extends Component{
                     </Link>
                 </div>
                 <div className="col-6">
-                    <NewPost key={this.props.user.id}/>
+                    <NewPost key={this.props.user.id} />
                     <br />
                     {postItems}
                 </div>
-                                
+
                 <div className="col-4">
                     <NewsColumn key={this.props.user.id} user={this.props.user} data={this.props.news.news} />
                 </div>
@@ -84,6 +88,7 @@ class Feed extends Component{
 
 }
 
+// Type checking
 Feed.propTypes = {
     fetchPosts: PropTypes.func.isRequired,
     fetchNews: PropTypes.func.isRequired,
@@ -91,6 +96,7 @@ Feed.propTypes = {
     newPost: PropTypes.object
 };
 
+// redux updates the states, map states and props here
 const mapStateToProps = state => ({
     news: state.news.news,
     posts: state.posts.items,

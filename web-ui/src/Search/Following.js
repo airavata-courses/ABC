@@ -2,22 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchFollowing } from '../_actions/search.actions'
 import { PopulateUser } from './PopulateUser'
-
+import { followUser, unFollowUser } from '../_actions'
+import PropTypes from 'prop-types';
 import Profile from '../components/profile';
 import { Link } from 'react-router-dom';
 class Following extends Component {
-
+    constructor(props) {
+        super(props);
+        this.toggleFollow = this.toggleFollow.bind(this); 
+    }
+    
     componentWillMount() {
         this.props.searchFollowing(this.props.user.id)
     }
 
-    toggleFollow () {
-        console.log("in toggle follow");
+    toggleFollow (userId, followUserId, doFollow) {
+        console.log("Following--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
+
+        const params = {
+            follower: userId,
+            following: followUserId
+        }
+        if (doFollow) {
+            this.props.followUser(params);
+        } else {
+            this.props.unFollowUser(params);
+        }
     }
     
-    render() {
 
-        const populateUsers = this.props.users.map(
+    render() {
+	console.log("FOLLOWING: ");
+	console.log(this.props.following);
+        const populateUsers = this.props.following.map(
             user => (
                 <PopulateUser key={user.userId}
                     data={user}
@@ -53,14 +70,18 @@ class Following extends Component {
         );
     }
 }
-
+Following.propTypes = {
+    followUser: PropTypes.func.isRequired,
+    unFollowUser: PropTypes.func.isRequired,
+    searchFollowing: PropTypes.func.isRequired
+};
 function mapStateToProps (state) {
     return {
-        users: state.search_result.users,
+        following: state.search_result.following,
         user: state.authentication.user
     };
 }
 
-const connectedFollowing = connect(mapStateToProps, { searchFollowing })(Following);
+const connectedFollowing = connect(mapStateToProps, { searchFollowing, followUser, unFollowUser})(Following);
 export {connectedFollowing as Following}
 

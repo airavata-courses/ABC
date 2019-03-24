@@ -28,7 +28,7 @@ class Search extends Component {
 
     // componentWillReceiveProps(nextProps) {
     //     console.log("componentwillreceiveprops");
-    //         console.log(nextProps);
+    //         console.log(nextProps);    
     // }
 
     onSubmit(e) {
@@ -48,7 +48,7 @@ class Search extends Component {
     }
 
     toggleFollow (userId, followUserId, doFollow) {
-        console.log("in toggle follow" + followUserId);
+        console.log("Search--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
 
         const params = {
             follower: userId,
@@ -67,7 +67,7 @@ class Search extends Component {
         //         <h1> NO USER FOUND</h1>
         //     );
         // }
-        const populateUsers = this.props.users.map(
+        const populateUsers = this.props.searchusers.map(
             user => (
                 <PopulateUser key={user.userId}
                     data={user}
@@ -138,7 +138,7 @@ function mapStateToProps (state) {
     console.log(state);
 
     return {
-        users: state.search_result.users,
+        searchusers: state.search_result.searchusers,
         user: state.authentication.user
     };
 }
