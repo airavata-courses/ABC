@@ -1,6 +1,6 @@
 {
   "development": {
-    "host": "localhost",
+    "host": "149.165.168.55",
     "port": "3306",
     "username": "root",
     "password": "",
@@ -8,7 +8,7 @@
     "dialect": "mysql"
   },
   "test": {
-    "host": "localhost",
+    "host": "149.165.168.55",
     "port": "3306",
     "username": "root",
     "password": "",
@@ -16,7 +16,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "host": "localhost",
+    "host": "149.165.168.55",
     "port": "3306",
     "username": "root",
     "password": "",
