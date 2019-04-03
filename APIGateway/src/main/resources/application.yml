@@ -10,10 +10,10 @@ zuul:
   routes:
     feed-service:
       path: /feed/**
-      url: http://feed.service.consul:8080/
+      url: http://localhost:30009/
     news:
       path: /news/**
-      url: http://news.service.consul:5000/
+      url: http://localhost:30012/
     users:
       path: /users/**
-      url: http://users.service.consul:3000/
+      url: http://localhost:30010/
