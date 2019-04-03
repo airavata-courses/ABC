@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+Test set: com.abc.feedservice.TweetsControllerTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 150.297 s <<< FAILURE! - in com.abc.feedservice.TweetsControllerTest
+getTweetsByUserIdSuccess(com.abc.feedservice.TweetsControllerTest)  Time elapsed: 30.011 s  <<< ERROR!
+org.springframework.dao.DataAccessResourceFailureException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]; nested exception is com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]
+	at com.abc.feedservice.TweetsControllerTest.getTweetsByUserIdSuccess(TweetsControllerTest.java:79)
+Caused by: com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]
+	at com.abc.feedservice.TweetsControllerTest.getTweetsByUserIdSuccess(TweetsControllerTest.java:79)
+
+createTweetTestSuccess(com.abc.feedservice.TweetsControllerTest)  Time elapsed: 30.055 s  <<< ERROR!
+org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 null
+	at com.abc.feedservice.TweetsControllerTest.createTweetTestSuccess(TweetsControllerTest.java:54)
+
+deleteTweetSuccess(com.abc.feedservice.TweetsControllerTest)  Time elapsed: 29.985 s  <<< ERROR!
+org.springframework.dao.DataAccessResourceFailureException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]; nested exception is com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]
+	at com.abc.feedservice.TweetsControllerTest.deleteTweetSuccess(TweetsControllerTest.java:137)
+Caused by: com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]
+	at com.abc.feedservice.TweetsControllerTest.deleteTweetSuccess(TweetsControllerTest.java:137)
+
+updateTweetSuccess(com.abc.feedservice.TweetsControllerTest)  Time elapsed: 30.012 s  <<< ERROR!
+org.springframework.dao.DataAccessResourceFailureException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]; nested exception is com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]
+	at com.abc.feedservice.TweetsControllerTest.updateTweetSuccess(TweetsControllerTest.java:110)
+Caused by: com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=149.165.170.59:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.SocketTimeoutException: connect timed out}}]
+	at com.abc.feedservice.TweetsControllerTest.updateTweetSuccess(TweetsControllerTest.java:110)
+
+deleteTweetFailure(com.abc.feedservice.TweetsControllerTest)  Time elapsed: 30.071 s  <<< ERROR!
+org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 null
+	at com.abc.feedservice.TweetsControllerTest.deleteTweetFailure(TweetsControllerTest.java:150)
+
