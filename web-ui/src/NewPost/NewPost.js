@@ -22,16 +22,18 @@ class NewPost extends Component {
 
     onSubmit(e) {
         e.preventDefault()
-        const post = {
-            userId: this.props.user.id,
-            userName: this.props.user.userName,
-            tweetText: this.state.tweetText
-        };
 
-        // setTimeOut( function() {
-        this.props.createPost(post);
-        // }, 1000);
+        if (this.state.tweetText && this.state.tweetText.trim() !== "") {
+            const post = {
+                userId: this.props.user.id,
+                userName: this.props.user.userName,
+                tweetText: this.state.tweetText
+            };
 
+            // setTimeOut( function() {
+            this.props.createPost(post);
+            // }, 1000);
+        }
     }
     componentDidCatch(error, info) {
         console.log(error);
