@@ -31,7 +31,6 @@ class NewPost extends Component {
         // setTimeOut( function() {
         this.props.createPost(post);
         // }, 1000);
-        // window.location.reload()
 
     }
     componentDidCatch(error, info) {

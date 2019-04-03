@@ -28,7 +28,7 @@ class Followers extends Component {
         } else {
             this.props.unFollowUser(params);
         }
-        window.location.reload();
+        // window.location.reload();
     }
 
     render() {

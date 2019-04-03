@@ -28,7 +28,7 @@ class Following extends Component {
         } else {
             this.props.unFollowUser(params);
         }
-        window.location.reload();
+        // window.location.reload();
     }
 
 
