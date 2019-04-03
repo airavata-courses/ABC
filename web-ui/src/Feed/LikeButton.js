@@ -10,6 +10,7 @@ class LikeButton extends Component {
 
     incrementLike(tweetId, userId) {
         this.props.updateLikeCount({ tweetId, userId });
+        window.location.reload();
     }
 
     render() {

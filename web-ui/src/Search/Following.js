@@ -9,14 +9,14 @@ import { Link } from 'react-router-dom';
 class Following extends Component {
     constructor(props) {
         super(props);
-        this.toggleFollow = this.toggleFollow.bind(this); 
+        this.toggleFollow = this.toggleFollow.bind(this);
     }
-    
+
     componentWillMount() {
         this.props.searchFollowing(this.props.user.id)
     }
 
-    toggleFollow (userId, followUserId, doFollow) {
+    toggleFollow(userId, followUserId, doFollow) {
         console.log("Following--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
 
         const params = {
@@ -28,12 +28,13 @@ class Following extends Component {
         } else {
             this.props.unFollowUser(params);
         }
+        window.location.reload();
     }
-    
+
 
     render() {
-	console.log("FOLLOWING: ");
-	console.log(this.props.following);
+        console.log("FOLLOWING: ");
+        console.log(this.props.following);
         const populateUsers = this.props.following.map(
             user => (
                 <PopulateUser key={user.userId}
@@ -47,7 +48,7 @@ class Following extends Component {
             <div className="row">
                 {console.log(this.props)}
                 <div className="col-2">
-                    <Profile key={this.props.user.id} user={this.props.user}/>
+                    <Profile key={this.props.user.id} user={this.props.user} />
                     <br />
                     <Link to="/">
                         <button className="btn btn-block btn-info">
@@ -75,13 +76,13 @@ Following.propTypes = {
     unFollowUser: PropTypes.func.isRequired,
     searchFollowing: PropTypes.func.isRequired
 };
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
         following: state.search_result.following,
         user: state.authentication.user
     };
 }
 
-const connectedFollowing = connect(mapStateToProps, { searchFollowing, followUser, unFollowUser})(Following);
-export {connectedFollowing as Following}
+const connectedFollowing = connect(mapStateToProps, { searchFollowing, followUser, unFollowUser })(Following);
+export { connectedFollowing as Following }
 

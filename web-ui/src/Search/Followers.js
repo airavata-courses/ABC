@@ -9,14 +9,14 @@ import { Link } from 'react-router-dom';
 class Followers extends Component {
     constructor(props) {
         super(props);
-        this.toggleFollow = this.toggleFollow.bind(this); 
+        this.toggleFollow = this.toggleFollow.bind(this);
     }
- 
+
     componentWillMount() {
         this.props.searchFollowers(this.props.user.id)
     }
 
-    toggleFollow (userId, followUserId, doFollow) {
+    toggleFollow(userId, followUserId, doFollow) {
         console.log("Followers--> userId: " + userId + ", followUserId: " + followUserId + ", doFollow: " + doFollow);
 
         const params = {
@@ -28,8 +28,9 @@ class Followers extends Component {
         } else {
             this.props.unFollowUser(params);
         }
+        window.location.reload();
     }
-    
+
     render() {
 
         const populateUsers = this.props.followers.map(
@@ -45,7 +46,7 @@ class Followers extends Component {
             <div className="row">
                 {console.log(this.props)}
                 <div className="col-2">
-                    <Profile key={this.props.user.id} user={this.props.user}/>
+                    <Profile key={this.props.user.id} user={this.props.user} />
                     <br />
                     <Link to="/">
                         <button className="btn btn-block btn-info">
@@ -74,7 +75,7 @@ Followers.propTypes = {
     searchFollowers: PropTypes.func.isRequired
 };
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
     return {
         followers: state.search_result.followers,
         user: state.authentication.user
@@ -82,5 +83,5 @@ function mapStateToProps (state) {
 }
 
 const connectedFollower = connect(mapStateToProps, { searchFollowers, followUser, unFollowUser })(Followers);
-export {connectedFollower as Followers}
+export { connectedFollower as Followers }
 

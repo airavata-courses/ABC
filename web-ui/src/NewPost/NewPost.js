@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createPost } from '../_actions/post.actions';
 
-class NewPost extends Component{
+class NewPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,15 +21,15 @@ class NewPost extends Component{
     }
 
     onSubmit(e) {
-	e.preventDefault()
-	const post = {
+        e.preventDefault()
+        const post = {
             userId: this.props.user.id,
             userName: this.props.user.userName,
             tweetText: this.state.tweetText
         };
 
         // setTimeOut( function() {
-            this.props.createPost(post);
+        this.props.createPost(post);
         // }, 1000);
         // window.location.reload()
 
@@ -37,7 +37,7 @@ class NewPost extends Component{
     componentDidCatch(error, info) {
         console.log(error);
         console.log(info);
-    } 
+    }
     render() {
         return (
             <form onSubmit={this.onSubmit}>
@@ -49,7 +49,7 @@ class NewPost extends Component{
                     </div>
 
                     { /*onChange="" */}
-                    <input  className="form-control"
+                    <input className="form-control"
                         name="tweetText"
                         type="text"
                         value={this.state.tweetText}
