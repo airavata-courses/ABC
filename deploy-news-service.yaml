@@ -1,0 +1,40 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: news-service
+  labels:
+    app: news-service
+spec:
+  type: NodePort
+  selector:
+    app: news-service
+  ports:
+      # Port accessible inside cluster
+    - port: 5000
+      # Port to forward to inside the pod
+      targetPort: 5000
+      # Port accessible outside cluster 
+      nodePort: 30012
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: news-service-deployment
+  labels:
+    app: news-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: news-service
+  template:
+    metadata:
+      labels:
+        app: news-service
+    spec:
+      containers:
+      - name: news-service
+        imagePullPolicy: Always
+        image: chetan253/news-service
+        ports:
+        - containerPort: 5000
