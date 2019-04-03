@@ -2,24 +2,24 @@
   "development": {
     "host": "149.165.168.55",
     "port": "3306",
-    "username": "root",
-    "password": "",
+    "username": "user",
+    "password": "password",
     "database": "node_mysql",
     "dialect": "mysql"
   },
   "test": {
     "host": "149.165.168.55",
     "port": "3306",
-    "username": "root",
-    "password": "",
+    "username": "user",
+    "password": "password",
     "database": "node_mysql",
     "dialect": "mysql"
   },
   "production": {
     "host": "149.165.168.55",
     "port": "3306",
-    "username": "root",
-    "password": "",
+    "username": "user",
+    "password": "password",
     "database": "node_mysql",
     "dialect": "mysql"
   }
