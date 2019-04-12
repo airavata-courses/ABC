@@ -10,10 +10,10 @@ zuul:
   routes:
     feed-service:
       path: /feed/**
-      url: http://localhost:30009/
+      url: http://feed-service:8080/
     news:
       path: /news/**
-      url: http://localhost:30012/
+      url: http://news-service:5000/
     users:
       path: /users/**
-      url: http://localhost:30010/
+      url: http://user-mgmt-service:3001/
