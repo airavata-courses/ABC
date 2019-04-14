@@ -28,31 +28,32 @@ module.exports = (sequelize, sendEmail) => {
         function (accessToken, refreshToken, profile, cb) {
             console.log('profile: ', profile);
 
-            var user = await UserController.find({ userId: profile.id })
-            if (user.length == 0) {
-                user = await UserController.create({
-                    userId: profile.id,
-                    firstName: profile.name.givenName,
-                    lastName: profile.name.familyName,
-                    email: profile.emails[0].value
-                });
-            }
-            user = user[0];
-            delete user.dataValues.password;
-            user.dataValues.id = user.dataValues.userId;
-            delete user.dataValues.userId;
-            res
-                .set("Authorization", "Bearer fake-jwt-token")
-                .status(200)
-                .send(user);
-            return cb(err, user);
-
-            // cb(null, {
-            //     googleId: profile.id
-            // });
-            // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            //   return cb(err, user);
-            // });
+            UserController.find({ userId: profile.id }).then(user => {
+                if (user.length == 0) {
+                    UserController.create({
+                        userId: profile.id,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        email: profile.emails[0].value
+                    }).then(user => {
+                        return user;
+                    })
+                } else {
+                    return user;
+                }
+            }).then(user => {
+                user = user[0];
+                delete user.dataValues.password;
+                user.dataValues.id = user.dataValues.userId;
+                delete user.dataValues.userId;
+                res
+                    .set("Authorization", "Bearer fake-jwt-token")
+                    .status(200)
+                    .send(user);
+                return cb(null, user);
+            }).catch(err => {
+                return cb(err, null);
+            });
         }
     ));
 
