@@ -7,12 +7,78 @@ var cors = require("cors");
 const Sequelize = require("sequelize");
 const emailValidator = require("email-validator");
 
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 module.exports = (sequelize, sendEmail) => {
     app.use(bodyParser.json());
     app.use(cors());
 
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     const { UserController } = sequelize.import("../../controllers/user");
     const { FollowController } = sequelize.import("../../controllers/follow");
+
+    passport.use(new GoogleStrategy({
+        clientID: '706053629191-r4s6bedb4fcpfdrqf4gtbdpve1mevvgs.apps.googleusercontent.com',
+        clientSecret: 'sYBpVZIbJxQGByuLqMwoDGTT',
+        callbackURL: "/auth/google/callback"
+    },
+        function (accessToken, refreshToken, profile, cb) {
+            console.log('profile: ', profile);
+
+            var user = await UserController.find({ userId: profile.id })
+            if (user.length == 0) {
+                user = await UserController.create({
+                    userId: profile.id,
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    email: profile.emails[0].value
+                });
+            }
+            user = user[0];
+            delete user.dataValues.password;
+            user.dataValues.id = user.dataValues.userId;
+            delete user.dataValues.userId;
+            res
+                .set("Authorization", "Bearer fake-jwt-token")
+                .status(200)
+                .send(user);
+            return cb(err, user);
+
+            // cb(null, {
+            //     googleId: profile.id
+            // });
+            // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+            //   return cb(err, user);
+            // });
+        }
+    ));
+
+    passport.serializeUser(function (user, done) {
+        done(null, user);
+    });
+
+    passport.deserializeUser(function (user, done) {
+        done(null, user);
+    });
+
+    app.get('/auth/google',
+        passport.authenticate('google', { scope: ['profile', 'email', 'openid'] })
+    );
+
+    app.get('/auth/google/callback',
+        passport.authenticate('google', { failureRedirect: '/login' }),
+        function (req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('/');
+        }
+    );
+
+    app.get('/logout', function (req, res) {
+        req.logout();
+    });
 
     // login
     app.post("/login", (req, res) => {
