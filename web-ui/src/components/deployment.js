@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NEWS_URL from '../_constants'
+import { NEWS_URL } from '../_constants'
 
 class Deployment extends Component {
     constructor() {
