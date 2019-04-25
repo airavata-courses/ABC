@@ -8,7 +8,7 @@ pipeline{
 		}	
 		stage('Test'){
 			steps{
-				sh 'cd ./FeedService && mvn test'
+				sh 'cd ./FeedService && mvn clean'
 			}
 		}
 		stage('Deploy'){
