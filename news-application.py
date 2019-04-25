@@ -17,6 +17,10 @@ def flask_news(api_key):
     # For removing x_hr warning
     # app.config["JSONIFY_PRETTYPRINT_REGULAR"] = False
 
+    @app.route("/color", methods=['GET'])
+    def color():
+        return "blue"
+
     @app.route("/", methods=['GET'])
     def index():
         return "Use /top_headlines endpoint to get latest headlines from \
