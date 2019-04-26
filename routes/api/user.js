@@ -173,7 +173,7 @@ module.exports = (sequelize, sendEmail) => {
                     UserController.create(params)
                         .then(createdUser => {
                             console.log('createdUser: ', createdUser);
-                            return new Array(createdUser);
+                            return createdUser;
                         }).then(user => {
                             console.log('user created first time: ', user);
                             user = user[0];
