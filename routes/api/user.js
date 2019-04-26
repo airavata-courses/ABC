@@ -170,10 +170,10 @@ module.exports = (sequelize, sendEmail) => {
                 console.log('in then', user);
                 if (user.length == 0) {
                     console.log('Couldn\'t find userName, creating..');
-                    return UserController.create(params)
+                    UserController.create(params)
                         .then(createdUser => {
                             console.log('createdUser: ', createdUser);
-                            return createdUser;
+                            return new Array(createdUser);
                         });
                 }
                 else {
