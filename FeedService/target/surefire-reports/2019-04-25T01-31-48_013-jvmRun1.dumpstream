@@ -1,0 +1,29 @@
+# Created at 2019-04-25T01:32:41.243
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: DEFAULT
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:397)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+
+# Created at 2019-04-25T01:32:41.246
+Unexpected IOException with stream: 2019-04-25 01:32:41.245  INFO 25396 --- [       Thread-6] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+
+
+# Created at 2019-04-25T01:32:41.247
+Unexpected IOException with stream: 2019-04-25 01:32:41.246  INFO 25396 --- [       Thread-6] o.s.i.channel.PublishSubscribeChannel    : Channel 'feed-service-1.errorChannel' has 0 subscriber(s).
+
+
+# Created at 2019-04-25T01:32:41.247
+Unexpected IOException with stream: 2019-04-25 01:32:41.247  INFO 25396 --- [       Thread-6] o.s.i.endpoint.EventDrivenConsumer       : stopped _org.springframework.integration.errorLogger
+
+
+# Created at 2019-04-25T01:32:41.248
+Unexpected IOException with stream: 2019-04-25 01:32:41.248  INFO 25396 --- [       Thread-6] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+
+
+# Created at 2019-04-25T01:32:41.477
+Unexpected IOException with stream: 2019-04-25 01:32:41.477  INFO 25396 --- [       Thread-6] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+
+
