@@ -86,37 +86,26 @@ module.exports = (sequelize, sendEmail) => {
         var userName = req.body.userName;
         var password = req.body.password;
 
-        if (type == 'web') {
-            if (!userName)
-                return res
-                    .status(400)
-                    .send({ error: { name: "userName is not specified" } });
-            if (!password)
-                return res
-                    .status(400)
-                    .send({ error: { name: "password is not specified" } });
-            UserController.find({ userName }).then(user => {
-                if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
-                    return res.status(400).send({ error: { name: "Invalid credentials" } });
-                user = user[0];
-                delete user.dataValues.password;
-                user.dataValues.id = user.dataValues.userId;
-                delete user.dataValues.userId;
-                res
-                    .set("Authorization", "Bearer fake-jwt-token")
-                    .status(200)
-                    .send(user);
-            });
-        } else {
-            var userId = req.body.userId;
-            UserController.find({ userId }).then(user => {
-                if (user.length == 0) {
-
-                } else {
-
-                }
-            })
-        }
+        if (!userName)
+            return res
+                .status(400)
+                .send({ error: { name: "userName is not specified" } });
+        if (!password)
+            return res
+                .status(400)
+                .send({ error: { name: "password is not specified" } });
+        UserController.find({ userName }).then(user => {
+            if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
+                return res.status(400).send({ error: { name: "Invalid credentials" } });
+            user = user[0];
+            delete user.dataValues.password;
+            user.dataValues.id = user.dataValues.userId;
+            delete user.dataValues.userId;
+            res
+                .set("Authorization", "Bearer fake-jwt-token")
+                .status(200)
+                .send(user);
+        });
     });
     // end of login
 
@@ -176,16 +165,17 @@ module.exports = (sequelize, sendEmail) => {
                     res.status(500).send({ error });
                 });
         } else {
-            UserController.find({ userId }).then(user => {
+            console.log('type: ', params.type);
+            UserController.find({ userName }).then(user => {
                 if (user.length == 0) {
-                    console.log('Couldn\'t find userId');
+                    console.log('Couldn\'t find userName, creating..');
                     UserController.create(req.body)
                         .then(user => {
-                            delete user.dataValues.password;
                             return user;
                         })
                 }
             }).then(user => {
+                console.log('user created: ', user);
                 user = user[0];
                 delete user.dataValues.password;
                 user.dataValues.id = user.dataValues.userId;
