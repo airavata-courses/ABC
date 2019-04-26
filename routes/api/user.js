@@ -189,6 +189,13 @@ module.exports = (sequelize, sendEmail) => {
                 }
                 else {
                     console.log('user found: ', user);
+                    if (Array.isArray(user)) {
+                        console.log('got array, returning first element');
+                        user = user[0];
+                    } else {
+                        console.log('got element.');
+                    }
+
                     delete user.dataValues.password;
                     user.dataValues.id = user.dataValues.userId;
                     delete user.dataValues.userId;
