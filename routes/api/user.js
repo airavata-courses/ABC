@@ -166,7 +166,7 @@ module.exports = (sequelize, sendEmail) => {
                 });
         } else {
             console.log('type: ', params.type);
-            UserController.find({ userName }).then(user => {
+            UserController.find({ userId: params.userId }).then(user => {
                 if (user.length == 0) {
                     console.log('Couldn\'t find userName, creating..');
                     UserController.create(req.body)
