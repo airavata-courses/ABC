@@ -172,6 +172,7 @@ module.exports = (sequelize, sendEmail) => {
                     console.log('Couldn\'t find userName, creating..');
                     UserController.create(user)
                         .then(createdUser => {
+                            console.log('createdUser: ', createdUser);
                             return createdUser;
                         })
                 }
