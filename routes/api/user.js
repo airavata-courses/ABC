@@ -99,6 +99,8 @@ module.exports = (sequelize, sendEmail) => {
                 return res.status(400).send({ error: { name: "Invalid credentials" } });
             user = user[0];
             delete user.dataValues.password;
+            user.dataValues.id = user.dataValues.userId;
+            console.log('login, returning', user);
             res
                 .set("Authorization", "Bearer fake-jwt-token")
                 .status(200)
@@ -143,6 +145,7 @@ module.exports = (sequelize, sendEmail) => {
             UserController.create(req.body)
                 .then(user => {
                     delete user.dataValues.password;
+                    user.dataValues.id = user.dataValues.userId;
                     return user;
                 })
                 .then(user => {
@@ -181,10 +184,9 @@ module.exports = (sequelize, sendEmail) => {
                                 console.log('got element.');
                             }
 
-                            // user = user[0];
-                            // delete user.dataValues.password;
-                            // user.dataValues.id = user.dataValues.userId;
-                            // delete user.dataValues.userId;
+                            user = user[0];
+                            delete user.dataValues.password;
+                            user.dataValues.id = user.dataValues.userId;
                             console.log('returning', user);
                             res
                                 .set("Authorization", "Bearer fake-jwt-token")
