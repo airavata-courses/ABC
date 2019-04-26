@@ -42,7 +42,13 @@ module.exports = (sequelize, sendEmail) => {
                     return user;
                 }
             }).then(user => {
-                user = user[0];
+                if (Array.isArray(user)) {
+                    console.log('got array, returning first element');
+                    user = user[0];
+                } else {
+                    console.log('got element.');
+                }
+
                 delete user.dataValues.password;
                 user.dataValues.id = user.dataValues.userId;
                 delete user.dataValues.userId;
@@ -95,9 +101,19 @@ module.exports = (sequelize, sendEmail) => {
                 .status(400)
                 .send({ error: { name: "password is not specified" } });
         UserController.find({ userName }).then(user => {
-            if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
+            if (user.length == 0)
                 return res.status(400).send({ error: { name: "Invalid credentials" } });
-            user = user[0];
+
+            if (Array.isArray(user)) {
+                console.log('got array, returning first element');
+                user = user[0];
+            } else {
+                console.log('got element.');
+            }
+
+            if (!bcrypt.compareSync(password, user.password))
+                return res.status(400).send({ error: { name: "Invalid credentials" } });
+
             delete user.dataValues.password;
             user.dataValues.id = user.dataValues.userId;
             console.log('login, returning', user);
@@ -184,7 +200,6 @@ module.exports = (sequelize, sendEmail) => {
                                 console.log('got element.');
                             }
 
-                            user = user[0];
                             delete user.dataValues.password;
                             user.dataValues.id = user.dataValues.userId;
                             console.log('returning', user);
@@ -260,6 +275,7 @@ module.exports = (sequelize, sendEmail) => {
         UserController.find({ userId })
             .then(user => {
                 if (user.length == 0) return res.status(404).send();
+
                 res
                     .set("Authorization", "Bearer fake-jwt-token")
                     .status(200)
