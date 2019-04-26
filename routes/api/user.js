@@ -99,8 +99,6 @@ module.exports = (sequelize, sendEmail) => {
                 return res.status(400).send({ error: { name: "Invalid credentials" } });
             user = user[0];
             delete user.dataValues.password;
-            user.dataValues.id = user.dataValues.userId;
-            delete user.dataValues.userId;
             res
                 .set("Authorization", "Bearer fake-jwt-token")
                 .status(200)
