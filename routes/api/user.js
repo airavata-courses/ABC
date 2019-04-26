@@ -189,7 +189,6 @@ module.exports = (sequelize, sendEmail) => {
                 }
                 else {
                     console.log('user found: ', user);
-                    user = user[0];
                     delete user.dataValues.password;
                     user.dataValues.id = user.dataValues.userId;
                     delete user.dataValues.userId;
