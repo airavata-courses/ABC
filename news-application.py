@@ -26,6 +26,10 @@ def flask_news(api_key):
     def check_health():
         return "Up and running."
 
+    @app.route("/color", methods=['GET'])
+    def returnNode():
+        return "green"
+
     @app.route("/top_headlines", methods=["GET"])
     def get_news():
         """
