@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tweet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FeedService</a> &gt; <a href="index.source.html" class="el_package">com.abc.feedservice.model</a> &gt; <span class="el_source">Tweet.java</span></div><h1>Tweet.java</h1><pre class="source lang-java linenums">package com.abc.feedservice.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * @author chetan253 on 1/30/19
+ * @apiNote Model for storing tweets created by user
+ */
+
+@Document(collection = &quot;tweets&quot;)
+public class Tweet implements Serializable {
+
+    @Id
+    private String id;
+
+    private String userId;
+    private String userName;
+    private String name;
+    private String tweetText;
+    private Date dateCreated;
+    private long likeCount;
+
+<span class="fc" id="L27">    public Tweet(){</span>
+
+<span class="fc" id="L29">    }</span>
+
+<span class="nc" id="L31">    public Tweet(String id, String userId, String userName, String name, String tweetText, Date dateCreated, long likeCount) {</span>
+<span class="nc" id="L32">        this.id = id;</span>
+<span class="nc" id="L33">        this.userId = userId;</span>
+<span class="nc" id="L34">        this.userName = userName;</span>
+<span class="nc" id="L35">        this.name =  name;</span>
+<span class="nc" id="L36">        this.tweetText = tweetText;</span>
+<span class="nc" id="L37">        this.dateCreated = dateCreated;</span>
+<span class="nc" id="L38">        this.likeCount = likeCount;</span>
+<span class="nc" id="L39">    }</span>
+
+    public String getId() {
+<span class="nc" id="L42">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L46">        this.id = id;</span>
+<span class="fc" id="L47">    }</span>
+
+    public String getUserId() {
+<span class="nc" id="L50">        return userId;</span>
+    }
+
+    public void setUserId(String userId) {
+<span class="fc" id="L54">        this.userId = userId;</span>
+<span class="fc" id="L55">    }</span>
+
+    public String getUserName() {
+<span class="nc" id="L58">        return userName;</span>
+    }
+
+    public void setUserName(String userName) {
+<span class="fc" id="L62">        this.userName = userName;</span>
+<span class="fc" id="L63">    }</span>
+
+    public String getName() {
+<span class="nc" id="L66">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="nc" id="L70">        this.name = name;</span>
+<span class="nc" id="L71">    }</span>
+
+    public String getTweetText() {
+<span class="nc" id="L74">        return tweetText;</span>
+    }
+
+    public void setTweetText(String tweetText) {
+<span class="fc" id="L78">        this.tweetText = tweetText;</span>
+<span class="fc" id="L79">    }</span>
+
+    public Date getDateCreated() {
+<span class="nc" id="L82">        return dateCreated;</span>
+    }
+
+    public void setDateCreated(Date dateCreated) {
+<span class="nc" id="L86">        this.dateCreated = dateCreated;</span>
+<span class="nc" id="L87">    }</span>
+
+    public long getLikeCount() {
+<span class="nc" id="L90">        return likeCount;</span>
+    }
+
+    public void setLikeCount(long likeCount) {
+<span class="nc" id="L94">        this.likeCount = likeCount;</span>
+<span class="nc" id="L95">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L99">        return &quot;Tweet{&quot; +</span>
+                &quot;id='&quot; + id + '\'' +
+                &quot;, userId='&quot; + userId + '\'' +
+                &quot;, userName='&quot; + userName + '\'' +
+                &quot;, tweetText='&quot; + tweetText + '\'' +
+                &quot;, dateCreated=&quot; + dateCreated +
+                &quot;, likeCount=&quot; + likeCount +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

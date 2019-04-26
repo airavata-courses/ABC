@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FeedController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FeedService</a> &gt; <a href="index.source.html" class="el_package">com.abc.feedservice.controller</a> &gt; <span class="el_source">FeedController.java</span></div><h1>FeedController.java</h1><pre class="source lang-java linenums">package com.abc.feedservice.controller;
+
+import com.abc.feedservice.model.Tweet;
+import com.abc.feedservice.services.FeedService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author chetan253 on 2/5/19
+ * @apiNote
+ */
+
+@RestController
+@RequestMapping(value = &quot;/feed&quot;)
+<span class="fc" id="L30">public class FeedController {</span>
+
+<span class="fc" id="L32">    private static final Logger logger = LoggerFactory.getLogger(FeedController.class);</span>
+<span class="fc" id="L33">    ObjectMapper objectMapper = new ObjectMapper();</span>
+
+    @Autowired
+    FeedService feedService;
+
+    @CrossOrigin
+    @RequestMapping(value = &quot;/create/{userId}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity&lt;String&gt; createFeed(@PathVariable String userId) throws JsonProcessingException {
+<span class="nc" id="L41">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L42">        headers.add(&quot;Authorization&quot;,&quot;Bearer fake-jwt-token&quot;);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if(userId != null){</span>
+<span class="nc" id="L44">            RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L45">            String baseURL = &quot;http://user-mgmt-service:3001/relation/user/&quot;+ userId +&quot;/following&quot;;</span>
+<span class="nc" id="L46">            ResponseEntity&lt;String&gt; result = restTemplate.getForEntity(baseURL, String.class);</span>
+
+<span class="nc" id="L48">            JSONArray arr = new JSONArray(result.getBody());</span>
+
+<span class="nc" id="L50">            List&lt;String&gt; userFollowingIds = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            for(int i = 0; i &lt; arr.length(); i++){</span>
+<span class="nc" id="L52">                JSONObject ob = arr.getJSONObject(i);</span>
+<span class="nc" id="L53">                userFollowingIds.add(ob.get(&quot;userId&quot;).toString());</span>
+            }
+<span class="nc" id="L55">            userFollowingIds.add(userId);</span>
+<span class="nc" id="L56">            List&lt;Tweet&gt; feed = feedService.createFeed(userFollowingIds);</span>
+<span class="nc" id="L57">            logger.info(objectMapper.writeValueAsString(feed));</span>
+<span class="nc" id="L58">            return new ResponseEntity&lt;&gt;(objectMapper.writeValueAsString(feed), headers, HttpStatus.OK);</span>
+        }
+
+<span class="nc" id="L61">        return new ResponseEntity&lt;&gt;(headers, HttpStatus.BAD_REQUEST);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

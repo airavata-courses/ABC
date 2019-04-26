@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+FeedService,com.abc.feedservice.controller,TweetLikeController,280,12,14,0,44,3,11,2,4,2
+FeedService,com.abc.feedservice.controller,TweetsController,248,12,22,0,40,3,15,2,4,2
+FeedService,com.abc.feedservice.controller,FeedController,93,12,4,0,16,3,3,2,1,2
+FeedService,com.abc.feedservice.model,TweetLike,32,11,0,0,13,6,7,3,7,3
+FeedService,com.abc.feedservice.model,Tweet,102,19,0,0,23,10,12,5,12,5
+FeedService,com.abc.feedservice,FeedServiceApplication,19,8,0,0,4,2,3,1,3,1
+FeedService,com.abc.feedservice.services,FeedService,5,3,0,0,1,1,1,1,1,1
