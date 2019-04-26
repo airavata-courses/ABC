@@ -10,8 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     // This methods takes only essential parameters from incoming json object and tries to save it on database.
     // Returns a promise
     create: params => {
+      uid = params.userId || uuidv4();
       return User.create({
-        userId: params.userId || uuidv4(),
+        userId: uid,
+        id: uid,
         userName: params.userName,
         password: bcrypt.hashSync(params.password),
         firstName: params.firstName,
