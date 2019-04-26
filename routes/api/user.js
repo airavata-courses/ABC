@@ -174,23 +174,32 @@ module.exports = (sequelize, sendEmail) => {
                         .then(createdUser => {
                             console.log('createdUser: ', createdUser);
                             return new Array(createdUser);
+                        }).then(user => {
+                            console.log('user created first time: ', user);
+                            user = user[0];
+                            delete user.dataValues.password;
+                            user.dataValues.id = user.dataValues.userId;
+                            delete user.dataValues.userId;
+                            console.log('returning', user);
+                            res
+                                .set("Authorization", "Bearer fake-jwt-token")
+                                .status(200)
+                                .send(user);
                         });
                 }
                 else {
-                    console.log('returning user', user);
-                    return user;
+                    console.log('user found: ', user);
+                    user = user[0];
+                    delete user.dataValues.password;
+                    user.dataValues.id = user.dataValues.userId;
+                    delete user.dataValues.userId;
+                    console.log('returning', user);
+                    res
+                        .set("Authorization", "Bearer fake-jwt-token")
+                        .status(200)
+                        .send(user);
                 }
-            }).then(user => {
-                console.log('user created: ', user);
-                user = user[0];
-                delete user.dataValues.password;
-                user.dataValues.id = user.dataValues.userId;
-                delete user.dataValues.userId;
-                res
-                    .set("Authorization", "Bearer fake-jwt-token")
-                    .status(200)
-                    .send(user);
-            });
+            })
         }
     });
 
