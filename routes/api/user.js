@@ -176,10 +176,17 @@ module.exports = (sequelize, sendEmail) => {
                             return createdUser;
                         }).then(user => {
                             console.log('user created first time: ', user);
-                            user = user[0];
-                            delete user.dataValues.password;
-                            user.dataValues.id = user.dataValues.userId;
-                            delete user.dataValues.userId;
+                            if (Array.isArray(user)) {
+                                console.log('got array, returning first element');
+                                user = user[0];
+                            } else {
+                                console.log('got element.');
+                            }
+
+                            // user = user[0];
+                            // delete user.dataValues.password;
+                            // user.dataValues.id = user.dataValues.userId;
+                            // delete user.dataValues.userId;
                             console.log('returning', user);
                             res
                                 .set("Authorization", "Bearer fake-jwt-token")
@@ -196,9 +203,9 @@ module.exports = (sequelize, sendEmail) => {
                         console.log('got element.');
                     }
 
-                    delete user.dataValues.password;
-                    user.dataValues.id = user.dataValues.userId;
-                    delete user.dataValues.userId;
+                    // delete user.dataValues.password;
+                    // user.dataValues.id = user.dataValues.userId;
+                    // delete user.dataValues.userId;
                     console.log('returning', user);
                     res
                         .set("Authorization", "Bearer fake-jwt-token")
