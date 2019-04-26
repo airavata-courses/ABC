@@ -11,6 +11,8 @@ function timeout(ms, promise) {
 }
 
 export function fetchPosts(id) {
+    console.log("Fetching post");
+    console.log(id);
     return function (dispatch) {
         // fetch('https://jsonplaceholder.typicode.com/posts')
         timeout(5000, fetch(`${FEED_URL}/feed/create/${id}`))

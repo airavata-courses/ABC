@@ -38,7 +38,7 @@ class Search extends Component {
         // console.log(this.props);
         const postData = {
             searchQuery: this.state.userSearch,
-            userId:  this.props.user.id
+            userId:  this.props.user.userId
         };
 
         // setTimeOut( function() {
@@ -139,7 +139,7 @@ function mapStateToProps (state) {
 
     return {
         searchusers: state.search_result.searchusers,
-        user: state.authentication.user
+        user: state.authentication.user.user
     };
 }
 
