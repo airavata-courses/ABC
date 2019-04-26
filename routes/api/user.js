@@ -85,31 +85,44 @@ module.exports = (sequelize, sendEmail) => {
     app.post("/login", (req, res) => {
         var userName = req.body.userName;
         var password = req.body.password;
-        if (!userName)
-            return res
-                .status(400)
-                .send({ error: { name: "userName is not specified" } });
-        if (!password)
-            return res
-                .status(400)
-                .send({ error: { name: "password is not specified" } });
-        UserController.find({ userName }).then(user => {
-            if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
-                return res.status(400).send({ error: { name: "Invalid credentials" } });
-            user = user[0];
-            delete user.dataValues.password;
-            user.dataValues.id = user.dataValues.userId;
-            delete user.dataValues.userId;
-            res
-                .set("Authorization", "Bearer fake-jwt-token")
-                .status(200)
-                .send(user);
-        });
+
+        if (type == 'web') {
+            if (!userName)
+                return res
+                    .status(400)
+                    .send({ error: { name: "userName is not specified" } });
+            if (!password)
+                return res
+                    .status(400)
+                    .send({ error: { name: "password is not specified" } });
+            UserController.find({ userName }).then(user => {
+                if (user.length == 0 || !bcrypt.compareSync(password, user[0].password))
+                    return res.status(400).send({ error: { name: "Invalid credentials" } });
+                user = user[0];
+                delete user.dataValues.password;
+                user.dataValues.id = user.dataValues.userId;
+                delete user.dataValues.userId;
+                res
+                    .set("Authorization", "Bearer fake-jwt-token")
+                    .status(200)
+                    .send(user);
+            });
+        } else {
+            var userId = req.body.userId;
+            UserController.find({ userId }).then(user => {
+                if (user.length == 0) {
+
+                } else {
+
+                }
+            })
+        }
     });
     // end of login
 
     app.post("/", (req, res) => {
         params = _.pick(req.body, [
+            "userId",
             "userName",
             "password",
             "firstName",
@@ -117,46 +130,72 @@ module.exports = (sequelize, sendEmail) => {
             "email",
             "bio",
             "dob",
-            "location"
+            "location",
+            "type"
         ]);
-        if (!params.userName)
-            return res
-                .status(400)
-                .send({ error: { name: "userName is not specified" } });
-        if (!params.password)
-            return res
-                .status(400)
-                .send({ error: { name: "password is not specified" } });
-        if (!params.email)
-            return res
-                .status(400)
-                .send({ error: { name: "email is not specified" } });
-        if (!emailValidator.validate(params.email))
-            return res
-                .status(400)
-                .send({ error: { name: "Invalid email address" } });
-        UserController.create(req.body)
-            .then(user => {
+
+        console.log('params: ', params);
+
+        if (params.type == 'web') {
+            if (!params.userName)
+                return res
+                    .status(400)
+                    .send({ error: { name: "userName is not specified" } });
+            if (!params.password)
+                return res
+                    .status(400)
+                    .send({ error: { name: "password is not specified" } });
+            if (!params.email)
+                return res
+                    .status(400)
+                    .send({ error: { name: "email is not specified" } });
+            if (!emailValidator.validate(params.email))
+                return res
+                    .status(400)
+                    .send({ error: { name: "Invalid email address" } });
+            UserController.create(req.body)
+                .then(user => {
+                    delete user.dataValues.password;
+                    return user;
+                })
+                .then(user => {
+                    // email
+                    // console.log('sending: ', user.dataValues);
+                    // sendEmail(JSON.stringify(user.dataValues));
+                    return user;
+                })
+                .then(user => {
+                    res
+                        .set("Authorization", "Bearer fake-jwt-token")
+                        .status(201)
+                        .send({ user });
+                })
+                .catch(error => {
+                    if (error.name === "SequelizeUniqueConstraintError")
+                        return res.status(409).send({ error });
+                    res.status(500).send({ error });
+                });
+        } else {
+            UserController.find({ userId }).then(user => {
+                if (user.length == 0) {
+                    console.log('Couldn\'t find userId');
+                    UserController.create(req.body)
+                        .then(user => {
+                            delete user.dataValues.password;
+                            return user;
+                        })
+                }
+            }).then(user => {
+                user = user[0];
                 delete user.dataValues.password;
-                return user;
-            })
-            .then(user => {
-                // email
-                console.log('sending: ', user.dataValues);
-                sendEmail(JSON.stringify(user.dataValues));
-                return user;
-            })
-            .then(user => {
+                user.dataValues.id = user.dataValues.userId;
+                delete user.dataValues.userId;
                 res
                     .set("Authorization", "Bearer fake-jwt-token")
-                    .status(201)
-                    .send({ user });
-            })
-            .catch(error => {
-                if (error.name === "SequelizeUniqueConstraintError")
-                    return res.status(409).send({ error });
-                res.status(500).send({ error });
+                    .status(200)
+                    .send(user);
             });
+        }
     });
 
     app.post("/search", (req, res) => {
