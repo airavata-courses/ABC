@@ -59,7 +59,7 @@ class Feed extends Component {
 
                 {/* Keys passed just to get rid of error. No actual user.*/}
                 <div className="col-2">
-                    <Profile key={this.props.user.id} user={this.props.user} />
+                    <Profile key={this.props.user.userId} user={this.props.user} />
                     <br />
                     <Link to="/search">
                         <button className="btn btn-block btn-info">

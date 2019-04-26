@@ -80,7 +80,7 @@ class Search extends Component {
 
             <div className="row">
                 <div className="col-2">
-                    <Profile key={this.props.user.id} user={this.props.user}/>
+                    <Profile key={this.props.user.userId} user={this.props.user}/>
                     <br />
                     <Link to="/">
                         <button className="btn btn-block btn-info">
