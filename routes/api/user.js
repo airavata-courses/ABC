@@ -165,14 +165,19 @@ module.exports = (sequelize, sendEmail) => {
                     res.status(500).send({ error });
                 });
         } else {
-            console.log('type: ', params.type);
+            console.log('type: ', params);
             UserController.find({ userId: params.userId }).then(user => {
+                console.log('in then', user);
                 if (user.length == 0) {
                     console.log('Couldn\'t find userName, creating..');
-                    UserController.create(req.body)
-                        .then(user => {
-                            return user;
+                    UserController.create(user)
+                        .then(createdUser => {
+                            return createdUser;
                         })
+                }
+                else {
+                    console.log('returning user', user);
+                    return user;
                 }
             }).then(user => {
                 console.log('user created: ', user);
