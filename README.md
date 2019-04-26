@@ -2,7 +2,7 @@
 [![Build Status](http://149.165.156.122:8080/buildStatus/icon?job=develop-user-management-service)](http://149.165.156.122:8080/job/develop-user-management-service/)
 
 This microservice helps to manage user data, followers and following relationships
-
+ 
 ### User API
 
 1. Create User (method = POST, endpoint = '/users/')
