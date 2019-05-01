@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../_actions';
 import Deployment from '../components/deployment';
-
+import { GoogleLogin } from 'react-google-login';
+import { userActions } from '../_actions';
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
@@ -15,11 +15,32 @@ class LoginPage extends React.Component {
         this.state = {
             userName: '',
             password: '',
-            submitted: false
+            submitted: false,
+	    redirect: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+	this.signup = this.signup.bind(this);
+    }
+    signup(res, type) {
+	console.log(res);
+    	let postdata;
+        const { dispatch } = this.props;
+	if(res.w3.U3){
+	   let name = res.w3.ig.split(" ");
+	   postdata =  {
+                firstName: name[0],
+                lastName: name[1],
+                email: res.w3.U3,
+                userName: res.El,
+		userId: res.El,
+                password: res.Zi.access_token,
+		type: 'google'
+            } 
+            
+	    dispatch(userActions.googlelogin(postdata));
+	}
     }
 
     handleChange(e) {
@@ -41,6 +62,10 @@ class LoginPage extends React.Component {
     render() {
         const { loggingIn } = this.props;
         const { userName, password, submitted } = this.state;
+	const responseGoogle = (response) => {
+  	    console.log(response);
+	    this.signup(response, 'google');
+	}
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
@@ -68,6 +93,17 @@ class LoginPage extends React.Component {
                     </div>
                     <Deployment />
                 </form>
+	    <GoogleLogin
+    		clientId="492291699458-5n1hrjgkgk2qsdcjvdt4dkn86sh3mukq.apps.googleusercontent.com"
+    		render={
+			renderProps => (
+      				<button onClick={renderProps.onClick} disabled={renderProps.disabled}>This is my custom Google button</button>
+    			)
+		   }
+	 	buttonText="Login"
+    		onSuccess={responseGoogle}
+    		onFailure={responseGoogle}
+    		cookiePolicy={'single_host_origin'}></GoogleLogin>
             </div>
         );
     }
@@ -75,8 +111,10 @@ class LoginPage extends React.Component {
 
 function mapStateToProps(state) {
     const { loggingIn } = state.authentication;
+    const { registering } = state.registration;
     return {
-        loggingIn
+        loggingIn,
+        registering
     };
 }
 

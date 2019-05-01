@@ -19,7 +19,7 @@ export default function users(state = {}, action) {
             return {
                 ...state,
                 items: state.items.map(user =>
-                    user.id === action.id
+                    user.userId === action.id
                     ? { ...user, deleting: true }
                     : user
                 )
@@ -27,14 +27,14 @@ export default function users(state = {}, action) {
         case userConstants.DELETE_SUCCESS:
             // remove deleted user from state
             return {
-                items: state.items.filter(user => user.id !== action.id)
+                items: state.items.filter(user => user.userId !== action.id)
             };
         case userConstants.DELETE_FAILURE:
             // remove 'deleting:true' property and add 'deleteError:[error]' property to user
             return {
                 ...state,
                 items: state.items.map(user => {
-                    if (user.id === action.id) {
+                    if (user.userId === action.id) {
                         // make copy of user without 'deleting:true' property
                         const { deleting, ...userCopy } = user;
                         // return copy of user with 'deleteError:[error]' property
