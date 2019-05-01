@@ -14,7 +14,7 @@ export function PopulateUser (props) {
                 <p className="card-text text-dark"> Button does not toggle on success or failure (<b>for now</b>). Pleae check <b>followers</b> or <b>following</b> list </p>
                 { props.data.following ?
                         <button className="btn btn-danger"
-                            onClick={() => props.onClickToggleFollow(props.user.userId, props.data.userId, false)}
+                            onClick={() => props.onClickToggleFollow(props.user.id, props.data.userId, false)}
                             disabled={false}  
                         >
                             <span className="badge">
@@ -25,11 +25,11 @@ export function PopulateUser (props) {
 
                         :
                         <button className="btn btn-primary" 
-                            onClick={() => props.onClickToggleFollow(props.user.userId, props.data.userId, true)}
+                            onClick={() => props.onClickToggleFollow(props.user.id, props.data.userId, true)}
                             disabled={false} 
                         >
                             <span className="badge">
-                                {/*props.data.userId} {props.user.userName*/} Follow
+                                {/*props.data.id} {props.user.userName*/} Follow
                             </span> 
 
                         </button>

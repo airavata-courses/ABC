@@ -13,7 +13,7 @@ class Following extends Component {
     }
 
     componentWillMount() {
-        this.props.searchFollowing(this.props.user.userId)
+        this.props.searchFollowing(this.props.user.id)
     }
 
     toggleFollow(userId, followUserId, doFollow) {
@@ -37,7 +37,7 @@ class Following extends Component {
         console.log(this.props.following);
         const populateUsers = this.props.following.map(
             user => (
-                <PopulateUser key={user.userId}
+                <PopulateUser key={user.id}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}
@@ -48,7 +48,7 @@ class Following extends Component {
             <div className="row">
                 {console.log(this.props)}
                 <div className="col-2">
-                    <Profile key={this.props.user.userId} user={this.props.user} />
+                    <Profile key={this.props.user.id} user={this.props.user} />
                     <br />
                     <Link to="/">
                         <button className="btn btn-block btn-info">
@@ -79,7 +79,7 @@ Following.propTypes = {
 function mapStateToProps(state) {
     return {
         following: state.search_result.following,
-        user: state.authentication.user.user
+        user: state.authentication.user
     };
 }
 

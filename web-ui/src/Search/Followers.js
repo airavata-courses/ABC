@@ -35,7 +35,7 @@ class Followers extends Component {
 
         const populateUsers = this.props.followers.map(
             user => (
-                <PopulateUser key={user.userId}
+                <PopulateUser key={user.id}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}
@@ -78,7 +78,7 @@ Followers.propTypes = {
 function mapStateToProps(state) {
     return {
         followers: state.search_result.followers,
-        user: state.authentication.user.user
+        user: state.authentication.user
     };
 }
 

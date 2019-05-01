@@ -25,7 +25,7 @@ class NewPost extends Component {
 
         if (this.state.tweetText && this.state.tweetText.trim() !== "") {
             const post = {
-                userId: this.props.user.userId,
+                userId: this.props.user.id,
                 userName: this.props.user.userName,
                 tweetText: this.state.tweetText
             };
@@ -76,7 +76,7 @@ NewPost.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    user: state.authentication.user.user
+    user: state.authentication.user
 });
 
 //function mapStateToProps(state) {

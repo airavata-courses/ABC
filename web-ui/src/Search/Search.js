@@ -38,7 +38,7 @@ class Search extends Component {
         // console.log(this.props);
         const postData = {
             searchQuery: this.state.userSearch,
-            userId:  this.props.user.userId
+            userId:  this.props.user.id
         };
 
         // setTimeOut( function() {
@@ -69,7 +69,7 @@ class Search extends Component {
         // }
         const populateUsers = this.props.searchusers.map(
             user => (
-                <PopulateUser key={user.userId}
+                <PopulateUser key={user.id}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}
@@ -80,7 +80,7 @@ class Search extends Component {
 
             <div className="row">
                 <div className="col-2">
-                    <Profile key={this.props.user.userId} user={this.props.user}/>
+                    <Profile key={this.props.user.id} user={this.props.user}/>
                     <br />
                     <Link to="/">
                         <button className="btn btn-block btn-info">
@@ -139,7 +139,7 @@ function mapStateToProps (state) {
 
     return {
         searchusers: state.search_result.searchusers,
-        user: state.authentication.user.user
+        user: state.authentication.user
     };
 }
 

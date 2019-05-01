@@ -24,7 +24,7 @@ class FeedPost extends Component {
                         disabled={false}
                         likeCount={this.props.data.likeCount}
                         tweetId={this.props.data.id}
-                        userId={this.props.user.userId}
+                        userId={this.props.user.id}
                     />
                 </div>
             </div>
