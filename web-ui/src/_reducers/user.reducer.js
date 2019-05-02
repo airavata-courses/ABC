@@ -19,7 +19,7 @@ export default function users(state = {}, action) {
             return {
                 ...state,
                 items: state.items.map(user =>
-                    user.id === action.id
+                    user.id=== action.id
                     ? { ...user, deleting: true }
                     : user
                 )

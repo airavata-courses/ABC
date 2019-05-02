@@ -13,7 +13,7 @@ class Followers extends Component {
     }
 
     componentWillMount() {
-        this.props.searchFollowers(this.props.user.id)
+        this.props.searchFollowers(this.props.user.userId)
     }
 
     toggleFollow(userId, followUserId, doFollow) {
@@ -35,7 +35,7 @@ class Followers extends Component {
 
         const populateUsers = this.props.followers.map(
             user => (
-                <PopulateUser key={user.userId}
+                <PopulateUser key={user.id}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}
@@ -46,7 +46,7 @@ class Followers extends Component {
             <div className="row">
                 {console.log(this.props)}
                 <div className="col-2">
-                    <Profile key={this.props.user.id} user={this.props.user} />
+                    <Profile key={this.props.user.userId} user={this.props.user} />
                     <br />
                     <Link to="/">
                         <button className="btn btn-block btn-info">

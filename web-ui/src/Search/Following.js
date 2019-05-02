@@ -37,7 +37,7 @@ class Following extends Component {
         console.log(this.props.following);
         const populateUsers = this.props.following.map(
             user => (
-                <PopulateUser key={user.userId}
+                <PopulateUser key={user.id}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}

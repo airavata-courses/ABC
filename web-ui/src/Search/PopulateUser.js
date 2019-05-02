@@ -29,7 +29,7 @@ export function PopulateUser (props) {
                             disabled={false} 
                         >
                             <span className="badge">
-                                {/*props.data.userId} {props.user.userName*/} Follow
+                                {/*props.data.id} {props.user.userName*/} Follow
                             </span> 
 
                         </button>

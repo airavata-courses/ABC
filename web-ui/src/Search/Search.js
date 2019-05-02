@@ -69,7 +69,7 @@ class Search extends Component {
         // }
         const populateUsers = this.props.searchusers.map(
             user => (
-                <PopulateUser key={user.userId}
+                <PopulateUser key={user.id}
                     data={user}
                     user={this.props.user}
                     onClickToggleFollow={this.toggleFollow}

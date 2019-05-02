@@ -14,22 +14,24 @@ class Feed extends Component {
 
     componentWillMount() {
         // :w
+	//  console.log("FEED :: componentWillMount()");
+	//  console.log(this.props.user.user.userId);
         this.props.fetchPosts(this.props.user.id);
         this.props.fetchNews();
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("-----------------------------")
-        console.log(nextProps)
-        console.log(nextProps.newPost.length)
-        // if (nextProps.newPost.id) {
-        //     this.props.posts.unshift(nextProps.newPost);
-        // }
-        console.log("-----------------------------")
+        //  console.log("-----------------------------")
+        //  console.log(nextProps)
+        //  console.log(nextProps.newPost.length)
+        if (nextProps.newPost.id) {
+            this.props.posts.unshift(nextProps.newPost);
+        }
+        //  console.log("-----------------------------")
     }
 
     incrementLike(id, username) {
-        console.log('incrementLike called', this.props);
+        // console.log('incrementLike called', this.props);
         this.props.updateLikeCount({ id, username });
         //Likes will be incremented on server
         // this.setState({ likeCount : this.state.likeCount + 1});
